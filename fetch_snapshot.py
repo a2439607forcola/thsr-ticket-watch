@@ -24,6 +24,11 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+# Windows 主控台預設 cp950，遇到站名以外的字元會炸掉
+for _stream in (sys.stdout, sys.stderr):
+    if _stream.encoding and _stream.encoding.lower() not in ("utf-8", "utf8"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 BASE_URL = "https://tdx.transportdata.tw/api/basic/v2"
 AUTH_URL = "https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token"
 TAIPEI = ZoneInfo("Asia/Taipei")
@@ -64,15 +69,23 @@ def get_token() -> str:
 
 def api_get(token: str, path: str):
     url = f"{BASE_URL}/{path}"
-    for attempt in range(4):
+    backoffs = [5, 10, 20, 40, 60, 90]
+    for attempt, backoff in enumerate(backoffs + [0]):
         r = requests.get(
             url,
             headers={"authorization": f"Bearer {token}"},
             params={"$format": "JSON"},
             timeout=30,
         )
-        if r.status_code == 429:  # 被限流就退避重試
-            time.sleep(2 ** attempt)
+        if r.status_code == 429:  # TDX 免費方案限流頗敏感，耐心退避
+            if attempt >= len(backoffs):
+                break
+            wait = backoff
+            retry_after = r.headers.get("Retry-After")
+            if retry_after and retry_after.isdigit():
+                wait = max(wait, int(retry_after))
+            print(f"  429 限流，等 {wait}s 後重試（{attempt + 1}/{len(backoffs)}）...")
+            time.sleep(wait)
             continue
         if r.status_code == 404:  # 尚未開放訂票的日期會查無資料
             return None
@@ -85,16 +98,30 @@ def fetch_od(token: str, origin: str, dest: str, train_date: str):
     return api_get(token, f"Rail/THSR/AvailableSeatStatus/Train/OD/{origin}/to/{dest}/TrainDate/{train_date}")
 
 
+def fetch_timetable_map(token: str, origin: str, dest: str, train_date: str) -> dict:
+    """AvailableSeatStatus 的 OD 端點沒有出發時間，從每日時刻表補上 TrainNo→DepartureTime。"""
+    payload = api_get(token, f"Rail/THSR/DailyTimetable/OD/{origin}/to/{dest}/{train_date}")
+    mapping = {}
+    for item in payload or []:
+        info = item.get("DailyTrainInfo") or {}
+        train_no = str(info.get("TrainNo", "")).strip()
+        dep = (item.get("OriginStopTime") or {}).get("DepartureTime", "")
+        if train_no:
+            mapping[train_no] = dep
+    return mapping
+
+
 def normalize_status(value: str) -> str:
     if value in STATUS_RANK:
         return value
     return STATUS_ALIAS.get(value, value or "")
 
 
-def extract_trains(payload) -> dict:
+def extract_trains(payload, timetable: dict | None = None) -> dict:
     """容錯解析：外層可能是 list，也可能是含 AvailableSeats 的 dict。"""
     if payload is None:
         return {}
+    timetable = timetable or {}
     candidates = []
     if isinstance(payload, dict):
         candidates = payload.get("AvailableSeats") or payload.get("Trains") or []
@@ -113,7 +140,7 @@ def extract_trains(payload) -> dict:
         if not train_no:
             continue
         trains[train_no] = {
-            "dep": item.get("DepartureTime") or "",
+            "dep": item.get("DepartureTime") or timetable.get(train_no, ""),
             "standard": normalize_status(item.get("StandardSeatStatus", "")),
             "business": normalize_status(item.get("BusinessSeatStatus", "")),
         }
@@ -159,9 +186,11 @@ def run(run_kind: str, dates: list) -> None:
     new_rows = []
     fetched = 0
     for od in OD_PAIRS:
+        # 同車次各日出發時間幾乎相同，抓一天的時刻表當對照即可（僅作標註用）
+        timetable = fetch_timetable_map(token, od["origin"], od["dest"], dates[0])
         for train_date in dates:
             payload = fetch_od(token, od["origin"], od["dest"], train_date)
-            trains = extract_trains(payload)
+            trains = extract_trains(payload, timetable)
             fetched += 1
             spath = state_path(od, train_date)
             old = None
@@ -205,7 +234,7 @@ def run(run_kind: str, dates: list) -> None:
                     ),
                     encoding="utf-8",
                 )
-            time.sleep(0.4)  # 對 TDX 客氣一點
+            time.sleep(1.5)  # 對 TDX 客氣一點，免費方案限流敏感
 
     removed = cleanup_old_state(now_tpe.date())
     append_transitions(new_rows)
