@@ -1,0 +1,49 @@
+name: watch-today
+
+on:
+  schedule:
+    # UTC 0-16 時 + 22-23 時 = 台灣 06:00 ~ 翌日 00:59，涵蓋高鐵營運時段
+    # GitHub 排程會有數分鐘漂移，對統計影響不大
+    - cron: "*/10 0-16,22-23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: thsr-data
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Fetch today snapshot
+        env:
+          TDX_CLIENT_ID: ${{ secrets.TDX_CLIENT_ID }}
+          TDX_CLIENT_SECRET: ${{ secrets.TDX_CLIENT_SECRET }}
+        run: python fetch_snapshot.py --today
+
+      - name: Commit data
+        run: |
+          git config user.name "thsr-watch-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "no changes"
+            exit 0
+          fi
+          git commit -m "snapshot(today): $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M')"
+          for i in 1 2 3; do
+            git push && exit 0
+            git pull --rebase
+          done
+          git push
