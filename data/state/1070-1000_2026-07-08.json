@@ -1,20 +1,20 @@
 {
- "snapshot_utc": "2026-06-12T14:20:18+00:00",
- "snapshot_taipei": "2026-06-12T22:20:18+08:00",
+ "snapshot_utc": "2026-06-13T02:20:21+00:00",
+ "snapshot_taipei": "2026-06-13T10:20:21+08:00",
  "trains": {
   "0108": {
    "dep": "07:55",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0112": {
    "dep": "08:55",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0116": {
    "dep": "09:55",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0120": {
@@ -109,32 +109,32 @@
   },
   "0612": {
    "dep": "08:00",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0616": {
    "dep": "08:35",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0618": {
    "dep": "09:00",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0622": {
    "dep": "09:35",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0624": {
    "dep": "10:00",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0628": {
    "dep": "10:35",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0630": {
@@ -244,17 +244,17 @@
   },
   "0810": {
    "dep": "08:25",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0814": {
    "dep": "09:25",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0818": {
    "dep": "10:25",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0822": {
@@ -318,12 +318,12 @@
    "business": "Available"
   },
   "1238": {
-   "dep": "",
+   "dep": "15:15",
    "standard": "Available",
    "business": "Available"
   },
   "1246": {
-   "dep": "",
+   "dep": "17:15",
    "standard": "Available",
    "business": "Available"
   },
@@ -338,7 +338,7 @@
    "business": "Available"
   },
   "1336": {
-   "dep": "",
+   "dep": "21:50",
    "standard": "Available",
    "business": "Available"
   },

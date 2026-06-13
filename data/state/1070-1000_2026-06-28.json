@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-06-12T14:20:18+00:00",
- "snapshot_taipei": "2026-06-12T22:20:18+08:00",
+ "snapshot_utc": "2026-06-13T02:20:21+00:00",
+ "snapshot_taipei": "2026-06-13T10:20:21+08:00",
  "trains": {
   "0108": {
    "dep": "07:55",
@@ -44,7 +44,7 @@
   },
   "0140": {
    "dep": "15:55",
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "0144": {
@@ -59,7 +59,7 @@
   },
   "0152": {
    "dep": "18:55",
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "0156": {
@@ -199,7 +199,7 @@
   },
   "0670": {
    "dep": "17:35",
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "0672": {
@@ -323,47 +323,47 @@
    "business": "Available"
   },
   "1226": {
-   "dep": "",
+   "dep": "12:15",
    "standard": "Available",
    "business": "Available"
   },
   "1230": {
-   "dep": "",
+   "dep": "13:15",
    "standard": "Available",
    "business": "Available"
   },
   "1234": {
-   "dep": "",
+   "dep": "14:15",
    "standard": "Available",
    "business": "Available"
   },
   "1238": {
-   "dep": "",
+   "dep": "15:15",
    "standard": "Available",
    "business": "Available"
   },
   "1246": {
-   "dep": "",
+   "dep": "17:15",
    "standard": "Available",
    "business": "Available"
   },
   "1250": {
-   "dep": "",
+   "dep": "18:15",
    "standard": "Available",
    "business": "Available"
   },
   "1254": {
-   "dep": "",
+   "dep": "19:15",
    "standard": "Available",
    "business": "Available"
   },
   "1258": {
-   "dep": "",
+   "dep": "20:15",
    "standard": "Available",
    "business": "Available"
   },
   "1264": {
-   "dep": "",
+   "dep": "21:40",
    "standard": "Available",
    "business": "Available"
   },
@@ -373,7 +373,7 @@
    "business": "Available"
   },
   "1318": {
-   "dep": "",
+   "dep": "14:45",
    "standard": "Available",
    "business": "Available"
   },
@@ -383,27 +383,27 @@
    "business": "Available"
   },
   "1324": {
-   "dep": "",
+   "dep": "17:45",
    "standard": "Available",
    "business": "Available"
   },
   "1326": {
-   "dep": "",
+   "dep": "18:45",
    "standard": "Available",
    "business": "Available"
   },
   "1328": {
-   "dep": "",
+   "dep": "19:45",
    "standard": "Available",
    "business": "Available"
   },
   "1330": {
-   "dep": "",
+   "dep": "20:45",
    "standard": "Available",
    "business": "Available"
   },
   "1336": {
-   "dep": "",
+   "dep": "21:50",
    "standard": "Available",
    "business": "Available"
   },

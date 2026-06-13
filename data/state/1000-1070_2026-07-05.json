@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-06-12T14:20:18+00:00",
- "snapshot_taipei": "2026-06-12T22:20:18+08:00",
+ "snapshot_utc": "2026-06-13T02:20:21+00:00",
+ "snapshot_taipei": "2026-06-13T10:20:21+08:00",
  "trains": {
   "0109": {
    "dep": "07:31",
@@ -139,7 +139,7 @@
   },
   "0627": {
    "dep": "10:46",
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0633": {
@@ -323,7 +323,7 @@
    "business": "Available"
   },
   "1229": {
-   "dep": "",
+   "dep": "13:51",
    "standard": "Available",
    "business": "Available"
   },
@@ -333,32 +333,32 @@
    "business": "Available"
   },
   "1237": {
-   "dep": "",
+   "dep": "15:51",
    "standard": "Available",
    "business": "Available"
   },
   "1241": {
-   "dep": "",
+   "dep": "16:51",
    "standard": "Available",
    "business": "Available"
   },
   "1245": {
-   "dep": "",
+   "dep": "17:51",
    "standard": "Available",
    "business": "Available"
   },
   "1253": {
-   "dep": "",
+   "dep": "19:51",
    "standard": "Available",
    "business": "Available"
   },
   "1257": {
-   "dep": "",
+   "dep": "20:51",
    "standard": "Available",
    "business": "Available"
   },
   "1331": {
-   "dep": "",
+   "dep": "21:01",
    "standard": "Available",
    "business": "Available"
   },
