@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-06-13T14:20:19+00:00",
- "snapshot_taipei": "2026-06-13T22:20:19+08:00",
+ "snapshot_utc": "2026-06-14T02:20:08+00:00",
+ "snapshot_taipei": "2026-06-14T10:20:08+08:00",
  "trains": {
   "0109": {
    "dep": "07:31",
@@ -179,13 +179,13 @@
   },
   "0655": {
    "dep": "15:21",
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Full"
   },
   "0657": {
    "dep": "15:46",
-   "standard": "Full",
-   "business": "Full"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0661": {
    "dep": "16:21",
@@ -304,7 +304,7 @@
   },
   "0853": {
    "dep": "19:11",
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0857": {
@@ -318,12 +318,12 @@
    "business": "Available"
   },
   "1103": {
-   "dep": "",
+   "dep": "06:46",
    "standard": "Full",
    "business": "Full"
   },
   "1209": {
-   "dep": "",
+   "dep": "08:51",
    "standard": "Full",
    "business": "Full"
   },
@@ -348,19 +348,19 @@
    "business": "Full"
   },
   "1229": {
-   "dep": "13:51",
+   "dep": "",
    "standard": "Full",
    "business": "Full"
   },
   "1233": {
-   "dep": "14:51",
+   "dep": "",
    "standard": "Full",
-   "business": "Full"
+   "business": "Limited"
   },
   "1237": {
-   "dep": "15:51",
-   "standard": "Full",
-   "business": "Full"
+   "dep": "",
+   "standard": "Limited",
+   "business": "Limited"
   },
   "1241": {
    "dep": "16:51",
@@ -368,22 +368,22 @@
    "business": "Available"
   },
   "1245": {
-   "dep": "17:51",
+   "dep": "",
    "standard": "Available",
    "business": "Available"
   },
   "1253": {
-   "dep": "19:51",
+   "dep": "",
    "standard": "Available",
    "business": "Available"
   },
   "1257": {
-   "dep": "20:51",
+   "dep": "",
    "standard": "Available",
    "business": "Available"
   },
   "1305": {
-   "dep": "",
+   "dep": "08:01",
    "standard": "Full",
    "business": "Full"
   },
@@ -418,7 +418,7 @@
    "business": "Full"
   },
   "1685": {
-   "dep": "20:21",
+   "dep": "",
    "standard": "Available",
    "business": "Available"
   },
@@ -428,7 +428,7 @@
    "business": "Available"
   },
   "1985": {
-   "dep": "",
+   "dep": "22:10",
    "standard": "Available",
    "business": "Available"
   }
