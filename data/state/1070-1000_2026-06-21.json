@@ -1,10 +1,10 @@
 {
- "snapshot_utc": "2026-06-16T14:20:24+00:00",
- "snapshot_taipei": "2026-06-16T22:20:24+08:00",
+ "snapshot_utc": "2026-06-17T02:20:04+00:00",
+ "snapshot_taipei": "2026-06-17T10:20:04+08:00",
  "trains": {
   "0108": {
    "dep": "07:55",
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0112": {
@@ -100,7 +100,7 @@
   "0606": {
    "dep": "07:00",
    "standard": "Available",
-   "business": "Limited"
+   "business": "Full"
   },
   "0610": {
    "dep": "07:35",
@@ -109,7 +109,7 @@
   },
   "0612": {
    "dep": "08:00",
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Full"
   },
   "0616": {
@@ -313,8 +313,8 @@
    "business": "Full"
   },
   "1210": {
-   "dep": "",
-   "standard": "Full",
+   "dep": "08:15",
+   "standard": "Limited",
    "business": "Full"
   },
   "1214": {
@@ -338,12 +338,12 @@
    "business": "Full"
   },
   "1230": {
-   "dep": "",
+   "dep": "13:15",
    "standard": "Full",
    "business": "Full"
   },
   "1234": {
-   "dep": "",
+   "dep": "14:15",
    "standard": "Full",
    "business": "Full"
   },
@@ -358,22 +358,22 @@
    "business": "Full"
   },
   "1250": {
-   "dep": "",
+   "dep": "18:15",
    "standard": "Full",
    "business": "Full"
   },
   "1254": {
-   "dep": "",
+   "dep": "19:15",
    "standard": "Full",
    "business": "Full"
   },
   "1258": {
-   "dep": "",
+   "dep": "20:15",
    "standard": "Full",
    "business": "Full"
   },
   "1264": {
-   "dep": "",
+   "dep": "21:40",
    "standard": "Full",
    "business": "Full"
   },
@@ -393,7 +393,7 @@
    "business": "Full"
   },
   "1318": {
-   "dep": "",
+   "dep": "14:45",
    "standard": "Full",
    "business": "Full"
   },
@@ -403,7 +403,7 @@
    "business": "Full"
   },
   "1324": {
-   "dep": "",
+   "dep": "17:45",
    "standard": "Full",
    "business": "Full"
   },
@@ -418,7 +418,7 @@
    "business": "Full"
   },
   "1330": {
-   "dep": "",
+   "dep": "20:45",
    "standard": "Full",
    "business": "Full"
   },
@@ -428,17 +428,17 @@
    "business": "Full"
   },
   "1634": {
-   "dep": "",
+   "dep": "11:35",
    "standard": "Full",
    "business": "Full"
   },
   "1682": {
-   "dep": "",
+   "dep": "19:35",
    "standard": "Full",
    "business": "Full"
   },
   "1688": {
-   "dep": "",
+   "dep": "20:35",
    "standard": "Full",
    "business": "Full"
   },
