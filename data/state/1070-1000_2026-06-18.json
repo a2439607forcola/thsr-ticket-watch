@@ -1,12 +1,7 @@
 {
- "snapshot_utc": "2026-06-18T08:40:06+00:00",
- "snapshot_taipei": "2026-06-18T16:40:06+08:00",
+ "snapshot_utc": "2026-06-18T09:00:09+00:00",
+ "snapshot_taipei": "2026-06-18T17:00:09+08:00",
  "trains": {
-  "0136": {
-   "dep": "14:55",
-   "standard": "Full",
-   "business": "Full"
-  },
   "0140": {
    "dep": "15:55",
    "standard": "Full",
@@ -14,13 +9,13 @@
   },
   "0144": {
    "dep": "16:55",
-   "standard": "Limited",
-   "business": "Limited"
+   "standard": "Full",
+   "business": "Full"
   },
   "0148": {
    "dep": "17:55",
-   "standard": "Full",
-   "business": "Limited"
+   "standard": "Limited",
+   "business": "Full"
   },
   "0152": {
    "dep": "18:55",
@@ -46,11 +41,6 @@
    "dep": "22:10",
    "standard": "Available",
    "business": "Available"
-  },
-  "0652": {
-   "dep": "14:35",
-   "standard": "Full",
-   "business": "Full"
   },
   "0654": {
    "dep": "15:00",
@@ -80,7 +70,7 @@
   "0670": {
    "dep": "17:35",
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0672": {
    "dep": "18:00",
@@ -89,8 +79,8 @@
   },
   "0676": {
    "dep": "18:35",
-   "standard": "Full",
-   "business": "Full"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0678": {
    "dep": "19:00",
@@ -112,11 +102,6 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0834": {
-   "dep": "14:25",
-   "standard": "Full",
-   "business": "Available"
-  },
   "0838": {
    "dep": "15:25",
    "standard": "Full",
@@ -129,7 +114,7 @@
   },
   "0846": {
    "dep": "17:25",
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0850": {
@@ -160,12 +145,12 @@
   "1246": {
    "dep": "17:15",
    "standard": "Full",
-   "business": "Limited"
+   "business": "Available"
   },
   "1250": {
    "dep": "18:15",
    "standard": "Full",
-   "business": "Limited"
+   "business": "Available"
   },
   "1254": {
    "dep": "19:15",
@@ -195,7 +180,7 @@
   "1324": {
    "dep": "17:45",
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "1330": {
    "dep": "20:45",
