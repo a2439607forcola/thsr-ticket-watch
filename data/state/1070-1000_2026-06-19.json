@@ -1,12 +1,7 @@
 {
- "snapshot_utc": "2026-06-19T03:40:07+00:00",
- "snapshot_taipei": "2026-06-19T11:40:07+08:00",
+ "snapshot_utc": "2026-06-19T04:00:07+00:00",
+ "snapshot_taipei": "2026-06-19T12:00:07+08:00",
  "trains": {
-  "0116": {
-   "dep": "09:55",
-   "standard": "Full",
-   "business": "Full"
-  },
   "0120": {
    "dep": "10:55",
    "standard": "Full",
@@ -15,7 +10,7 @@
   "0124": {
    "dep": "11:55",
    "standard": "Limited",
-   "business": "Available"
+   "business": "Limited"
   },
   "0128": {
    "dep": "12:55",
@@ -72,11 +67,6 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0622": {
-   "dep": "09:35",
-   "standard": "Full",
-   "business": "Full"
-  },
   "0624": {
    "dep": "10:00",
    "standard": "Full",
@@ -94,7 +84,7 @@
   },
   "0636": {
    "dep": "12:00",
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0640": {
@@ -104,7 +94,7 @@
   },
   "0642": {
    "dep": "13:00",
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0646": {
@@ -120,7 +110,7 @@
   "0652": {
    "dep": "14:35",
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0654": {
    "dep": "15:00",
@@ -182,11 +172,6 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0814": {
-   "dep": "09:25",
-   "standard": "Full",
-   "business": "Full"
-  },
   "0818": {
    "dep": "10:25",
    "standard": "Full",
@@ -195,7 +180,7 @@
   "0822": {
    "dep": "11:25",
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0826": {
    "dep": "12:25",
@@ -270,7 +255,7 @@
   "1238": {
    "dep": "15:15",
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "1246": {
    "dep": "17:15",
@@ -295,7 +280,7 @@
   "1310": {
    "dep": "10:45",
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "1320": {
    "dep": "15:45",
@@ -310,7 +295,7 @@
   "1634": {
    "dep": "11:35",
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "1682": {
    "dep": "19:35",
