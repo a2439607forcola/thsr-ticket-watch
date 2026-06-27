@@ -55,6 +55,10 @@ CSV_FIELDS = [
     "direction", "train_date", "train_no", "departure_time",
     "seat_class", "old_status", "new_status", "days_before",
 ]
+# feed 新鮮度紀錄：每次當日抓取記下來源端 SrcUpdateTime，事後可檢驗夜間
+# 凍結/解凍時刻與空窗（零額外 API 成本，重用已抓的 payload）
+FRESHNESS_CSV = DATA_DIR / "feed_freshness.csv"
+FRESHNESS_FIELDS = ["detected_utc", "detected_taipei", "src_update_time", "n_seats"]
 
 
 def get_token() -> str:
@@ -205,6 +209,24 @@ def append_transitions(rows: list) -> None:
         writer.writerows(rows)
 
 
+def record_freshness(now_utc, now_tpe, payload) -> None:
+    """記錄來源端 SrcUpdateTime（重用已抓 payload，不額外打 API）。
+    隔天看凌晨那幾筆 src_update_time 有沒有前進，就知道 feed 是否夜間凍結。"""
+    src = payload.get("SrcUpdateTime", "") if isinstance(payload, dict) else ""
+    seats = payload.get("AvailableSeats") if isinstance(payload, dict) else None
+    is_new = not FRESHNESS_CSV.exists()
+    with FRESHNESS_CSV.open("a", newline="", encoding="utf-8-sig") as f:
+        writer = csv.DictWriter(f, fieldnames=FRESHNESS_FIELDS)
+        if is_new:
+            writer.writeheader()
+        writer.writerow({
+            "detected_utc": now_utc.isoformat(timespec="seconds"),
+            "detected_taipei": now_tpe.isoformat(timespec="seconds"),
+            "src_update_time": src,
+            "n_seats": len(seats) if seats else 0,
+        })
+
+
 def cleanup_old_state(today_tpe: date) -> int:
     """乘車日已過的 state 檔不再需要，刪掉避免堆積。"""
     removed = 0
@@ -232,7 +254,10 @@ def run(run_kind: str, dates: list) -> None:
     new_rows = []
     fetched = 0
     for train_date in dates:
-        by_od = group_all_od(fetch_all_od(token, train_date))  # 一次拿整天所有 OD
+        payload = fetch_all_od(token, train_date)  # 一次拿整天所有 OD
+        by_od = group_all_od(payload)
+        if run_kind == "today":
+            record_freshness(now_utc, now_tpe, payload)  # 記 feed 新鮮度（零額外 API）
         fetched += 1
         days_before = (date.fromisoformat(train_date) - now_tpe.date()).days
         for od in OD_PAIRS:
