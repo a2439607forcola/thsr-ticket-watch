@@ -33,10 +33,14 @@ BASE_URL = "https://tdx.transportdata.tw/api/basic/v2"
 AUTH_URL = "https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token"
 TAIPEI = ZoneInfo("Asia/Taipei")
 
-# 官方代碼（ptx rail_thsr_codes.xsd）：台北 1000、左營 1070
+# 官方代碼（ptx rail_thsr_codes.xsd）：台北 1000、台中 1040、左營 1070
 OD_PAIRS = [
     {"origin": "1000", "dest": "1070", "label": "台北→左營"},
     {"origin": "1070", "dest": "1000", "label": "左營→台北"},
+    {"origin": "1000", "dest": "1040", "label": "台北→台中"},
+    {"origin": "1040", "dest": "1000", "label": "台中→台北"},
+    {"origin": "1070", "dest": "1040", "label": "左營→台中"},
+    {"origin": "1040", "dest": "1070", "label": "台中→左營"},
 ]
 
 STATUS_RANK = {"Full": 0, "Limited": 1, "Available": 2}
@@ -95,20 +99,50 @@ def api_get(token: str, path: str):
 
 
 def fetch_od(token: str, origin: str, dest: str, train_date: str):
+    """單一 OD 的剩餘座位（保留給 --probe 快速檢查用）。"""
     return api_get(token, f"Rail/THSR/AvailableSeatStatus/Train/OD/{origin}/to/{dest}/TrainDate/{train_date}")
 
 
-def fetch_timetable_map(token: str, origin: str, dest: str, train_date: str) -> dict:
-    """AvailableSeatStatus 的 OD 端點沒有出發時間，從每日時刻表補上 TrainNo→DepartureTime。"""
-    payload = api_get(token, f"Rail/THSR/DailyTimetable/OD/{origin}/to/{dest}/{train_date}")
+def fetch_all_od(token: str, train_date: str):
+    """一次取回整天「所有」OD 組合的剩餘座位（2500+ 筆）。
+    比逐 OD 各打一次大幅省下呼叫次數，且之後加任何站對都不增加呼叫。"""
+    return api_get(token, f"Rail/THSR/AvailableSeatStatus/Train/OD/TrainDate/{train_date}")
+
+
+def fetch_timetable_all(token: str, train_date: str) -> dict:
+    """一次取回整天所有車次時刻表，建 (TrainNo, StationID)→DepartureTime。
+    同車次自不同站發車時間不同，故以 (車次, 起站) 為鍵。"""
+    payload = api_get(token, f"Rail/THSR/DailyTimetable/TrainDate/{train_date}")
     mapping = {}
     for item in payload or []:
         info = item.get("DailyTrainInfo") or {}
         train_no = str(info.get("TrainNo", "")).strip()
-        dep = (item.get("OriginStopTime") or {}).get("DepartureTime", "")
-        if train_no:
-            mapping[train_no] = dep
+        if not train_no:
+            continue
+        for stop in item.get("StopTimes") or []:
+            sid = str(stop.get("StationID", "")).strip()
+            if sid:
+                mapping[(train_no, sid)] = stop.get("DepartureTime", "")
     return mapping
+
+
+def group_all_od(payload) -> dict:
+    """把 fetch_all_od 的回傳依 (起站, 訖站) 分組 → {train_no: {standard, business}}。"""
+    seats = payload.get("AvailableSeats") if isinstance(payload, dict) else (payload or [])
+    result: dict = {}
+    for item in seats or []:
+        if not isinstance(item, dict):
+            continue
+        train_no = str(item.get("TrainNo", "")).strip()
+        if not train_no:
+            continue
+        key = (str(item.get("OriginStationID", "")).strip(),
+               str(item.get("DestinationStationID", "")).strip())
+        result.setdefault(key, {})[train_no] = {
+            "standard": normalize_status(item.get("StandardSeatStatus", "")),
+            "business": normalize_status(item.get("BusinessSeatStatus", "")),
+        }
+    return result
 
 
 def normalize_status(value: str) -> str:
@@ -183,23 +217,24 @@ def run(run_kind: str, dates: list) -> None:
     now_utc = datetime.now(timezone.utc)
     now_tpe = now_utc.astimezone(TAIPEI)
 
+    # 時刻表一天內近乎不變，抓第一個日期一次即可，建 (車次, 起站)→發車時間
+    timetable = fetch_timetable_all(token, dates[0])
+
     new_rows = []
     fetched = 0
-    for od in OD_PAIRS:
-        # 同車次各日出發時間幾乎相同，抓一天的時刻表當對照即可（僅作標註用）
-        timetable = fetch_timetable_map(token, od["origin"], od["dest"], dates[0])
-        for train_date in dates:
-            payload = fetch_od(token, od["origin"], od["dest"], train_date)
-            trains = extract_trains(payload, timetable)
-            fetched += 1
+    for train_date in dates:
+        by_od = group_all_od(fetch_all_od(token, train_date))  # 一次拿整天所有 OD
+        fetched += 1
+        days_before = (date.fromisoformat(train_date) - now_tpe.date()).days
+        for od in OD_PAIRS:
+            trains = by_od.get((od["origin"], od["dest"]))
+            if not trains:
+                continue
             spath = state_path(od, train_date)
-            old = None
-            if spath.exists():
-                old = json.loads(spath.read_text(encoding="utf-8"))
+            old = json.loads(spath.read_text(encoding="utf-8")) if spath.exists() else None
 
-            if trains and old:
+            if old:
                 prev_tpe = old.get("snapshot_taipei", "")
-                days_before = (date.fromisoformat(train_date) - now_tpe.date()).days
                 for train_no, cur in sorted(trains.items()):
                     prev = old.get("trains", {}).get(train_no)
                     for seat_class in ("standard", "business"):
@@ -214,32 +249,31 @@ def run(run_kind: str, dates: list) -> None:
                             "direction": od["label"],
                             "train_date": train_date,
                             "train_no": train_no,
-                            "departure_time": cur["dep"],
+                            "departure_time": timetable.get((train_no, od["origin"]), ""),
                             "seat_class": seat_class,
                             "old_status": old_status,
                             "new_status": cur[seat_class],
                             "days_before": days_before,
                         })
 
-            if trains:
-                spath.write_text(
-                    json.dumps(
-                        {
-                            "snapshot_utc": now_utc.isoformat(timespec="seconds"),
-                            "snapshot_taipei": now_tpe.isoformat(timespec="seconds"),
-                            "trains": trains,
-                        },
-                        ensure_ascii=False,
-                        indent=1,
-                    ),
-                    encoding="utf-8",
-                )
-            time.sleep(1.5)  # 對 TDX 客氣一點，免費方案限流敏感
+            spath.write_text(
+                json.dumps(
+                    {
+                        "snapshot_utc": now_utc.isoformat(timespec="seconds"),
+                        "snapshot_taipei": now_tpe.isoformat(timespec="seconds"),
+                        "trains": trains,
+                    },
+                    ensure_ascii=False,
+                    indent=1,
+                ),
+                encoding="utf-8",
+            )
+        time.sleep(1.5)  # 每抓完一個日期的全量後對 TDX 客氣一點
 
     removed = cleanup_old_state(now_tpe.date())
     append_transitions(new_rows)
     print(
-        f"[{now_tpe:%Y-%m-%d %H:%M}] {run_kind}: 查詢 {fetched} 組 OD×日期，"
+        f"[{now_tpe:%Y-%m-%d %H:%M}] {run_kind}: 查詢 {fetched} 個日期（各 1 次全 OD），"
         f"記錄 {len(new_rows)} 筆狀態轉變，清除 {removed} 個過期 state"
     )
     for row in new_rows:
