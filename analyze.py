@@ -139,6 +139,7 @@ def sellout_release_lines(rows: list, min_full_minutes: int = 30) -> list:
         groups[(r["direction"], r["train_date"], r["train_no"], r["seat_class"])].append(r)
 
     durations, released, censored, jitter = [], 0, 0, 0
+    release_hours = Counter()
     for items in groups.values():
         t_enter = None
         for r in sorted(items, key=lambda x: x["detected_taipei"]):
@@ -154,6 +155,7 @@ def sellout_release_lines(rows: list, min_full_minutes: int = 30) -> list:
                 mins = (t - t_enter).total_seconds() / 60
                 if mins >= min_full_minutes:
                     durations.append(mins)
+                    release_hours[t.hour] += 1
                     released += 1
                 else:
                     jitter += 1
@@ -189,6 +191,17 @@ def sellout_release_lines(rows: list, min_full_minutes: int = 30) -> list:
         f"- 被門檻濾掉的短抖動：{jitter} 段",
         "",
     ]
+    if release_hours:
+        mx = max(release_hours.values())
+        lines += [
+            "**釋出發生時刻（白天真實退票潮，非凌晨解凍那波）：**", "",
+            "| 時 | 次數 | 分布 |", "|---|---|---|",
+        ]
+        for h in range(24):
+            n = release_hours.get(h, 0)
+            if n:
+                lines.append(f"| {h:02d}時 | {n} | {'█' * round(n / mx * 20)} |")
+        lines += [""]
     return lines
 
 
