@@ -111,14 +111,21 @@ def fetch_od(token: str, origin: str, dest: str, train_date: str):
 
 
 def fetch_all_od(token: str, train_date: str):
-    """一次取回整天「所有」OD 組合的剩餘座位（2500+ 筆）。
-    比逐 OD 各打一次大幅省下呼叫次數，且之後加任何站對都不增加呼叫。
-    $select 只取需要欄位、砍掉多語言站名，單次計量約少 6 成。"""
+    """取回某日期「我們監測的那幾條線」的剩餘座位。
+    $select 砍欄位 + $filter 只回 OD_PAIRS 的線（全網 ~2500 筆篩到 ~130 筆），
+    單次計量約少 9 成。加站只需改 OD_PAIRS，$filter 會自動跟著變。"""
+    flt = " or ".join(
+        f"(OriginStationID eq '{od['origin']}' and DestinationStationID eq '{od['dest']}')"
+        for od in OD_PAIRS
+    )
     return api_get(
         token,
         f"Rail/THSR/AvailableSeatStatus/Train/OD/TrainDate/{train_date}",
-        {"$select": "TrainNo,OriginStationID,DestinationStationID,"
-                    "StandardSeatStatus,BusinessSeatStatus"},
+        {
+            "$select": "TrainNo,OriginStationID,DestinationStationID,"
+                       "StandardSeatStatus,BusinessSeatStatus",
+            "$filter": flt,
+        },
     )
 
 
@@ -347,6 +354,8 @@ def main() -> None:
     group.add_argument("--stations", action="store_true", help="列出車站代碼")
     parser.add_argument("--days-from", type=int, default=1, help="future 起始天數（含），預設 1")
     parser.add_argument("--days-to", type=int, default=27, help="future 結束天數（含），預設 27")
+    parser.add_argument("--weekdays",
+                        help="只抓這些星期的乘車日（0=一…6=日，逗號分隔），如 4,6=週五週日")
     args = parser.parse_args()
 
     if args.probe:
@@ -362,6 +371,12 @@ def main() -> None:
     else:
         dates = [(today_tpe + timedelta(days=i)).isoformat()
                  for i in range(args.days_from, args.days_to + 1)]
+        if args.weekdays:
+            keep = {int(x) for x in args.weekdays.split(",")}
+            dates = [d for d in dates if date.fromisoformat(d).weekday() in keep]
+        if not dates:
+            print("指定範圍內沒有符合的乘車日，跳過。")
+            return
         run("future", dates)
 
 
