@@ -3,8 +3,9 @@
 
 用法：python analyze.py
 """
+import argparse
 import csv
-from collections import Counter
+from collections import Counter, defaultdict
 from datetime import date, datetime
 from pathlib import Path
 
@@ -106,7 +107,97 @@ def heatmap_lines(releases: list) -> list:
     return lines + [""]
 
 
+def _daytime(t: datetime) -> bool:
+    """是否落在白天可觀測窗 05:10–23:50（避開夜間 feed 凍結與 05:05 解凍假象）。"""
+    mins = t.hour * 60 + t.minute
+    return 5 * 60 + 10 <= mins <= 23 * 60 + 50
+
+
+def _fmt_minutes(m: float) -> str:
+    return f"{int(round(m))} 分" if m < 120 else f"{m / 60:.1f} 小時"
+
+
+def sellout_release_lines(rows: list, min_full_minutes: int = 30) -> list:
+    """售完→釋出時間差（把 Full 當「存續時間」做生存分析，只用當日票）。
+
+    對每個 (車次×日期×車廂) 依時序重建狀態，用狀態機抓「進入 Full → 離開 Full」
+    區間，時間差＝離開−進入。三道過濾：
+      1) 沒看到進入時刻（解凍暴衝/左設限）的離開 → 跳過
+      2) 兩端須同日且都在白天窗（避開凍結窗）
+      3) Full 持續 < min_full_minutes → 視為門檻抖動丟棄
+    滿到序列結束仍未釋出者計為右設限，單獨報「未釋出比例」。
+    """
+    groups = defaultdict(list)
+    for r in rows:
+        if r["run_kind"] != "today":
+            continue
+        try:
+            if int(r["days_before"]) > 0:
+                continue
+        except ValueError:
+            continue
+        groups[(r["direction"], r["train_date"], r["train_no"], r["seat_class"])].append(r)
+
+    durations, released, censored, jitter = [], 0, 0, 0
+    for items in groups.values():
+        t_enter = None
+        for r in sorted(items, key=lambda x: x["detected_taipei"]):
+            t = datetime.fromisoformat(r["detected_taipei"])
+            if r["new_status"] == "Full":
+                t_enter = t
+            elif r["old_status"] == "Full":          # 離開 Full ＝ 釋出
+                if t_enter is None:                   # 沒看到何時進入（解凍/左設限）
+                    continue
+                if not (_daytime(t_enter) and _daytime(t) and t_enter.date() == t.date()):
+                    t_enter = None                    # 區間碰到凍結窗，剔除
+                    continue
+                mins = (t - t_enter).total_seconds() / 60
+                if mins >= min_full_minutes:
+                    durations.append(mins)
+                    released += 1
+                else:
+                    jitter += 1
+                t_enter = None
+        if t_enter is not None and _daytime(t_enter):  # 滿到最後沒等到釋出
+            censored += 1
+
+    if not durations and not censored:
+        return []
+
+    durations.sort()
+    pct = lambda p: durations[min(int(p / 100 * len(durations)), len(durations) - 1)]
+    lines = [
+        "## 售完 → 釋出時間差（當日票）",
+        "",
+        f"> 「滿了之後多久出現第一次釋出」。只算當日票、Full 持續 ≥ {min_full_minutes} 分"
+        "（濾門檻抖動）、避開夜間凍結窗（05:10–23:50 外剔除）。",
+        "> 解析度 ±10 分；`Full` 是三態標籤，非真正售罄。",
+        "",
+    ]
+    if durations:
+        lines += [
+            f"- 有效「滿→釋出」樣本：**{released}** 段",
+            f"- **中位數 {_fmt_minutes(pct(50))}**（一半的 Full 在此時間內等到釋出）",
+            f"- 四分位：P25 {_fmt_minutes(pct(25))} ／ P75 {_fmt_minutes(pct(75))}",
+            f"- 最短 / 最長：{_fmt_minutes(durations[0])} / {_fmt_minutes(durations[-1])}",
+            "",
+        ]
+    total = released + censored
+    note = f"（未釋出比例 {censored / total * 100:.0f}%）" if total else ""
+    lines += [
+        f"- 滿到觀測結束仍未釋出（右設限）：{censored} 段{note}",
+        f"- 被門檻濾掉的短抖動：{jitter} 段",
+        "",
+    ]
+    return lines
+
+
 def main():
+    parser = argparse.ArgumentParser(description="彙整 transitions.csv 產出 report.md")
+    parser.add_argument("--min-full-minutes", type=int, default=30,
+                        help="售完→釋出分析的最短 Full 持續門檻（分鐘），濾掉門檻抖動，預設 30")
+    args = parser.parse_args()
+
     rows = load_rows()
     if not rows:
         print("data/transitions.csv 還沒有資料，先讓 fetch_snapshot.py 跑幾輪吧。")
@@ -187,6 +278,9 @@ def main():
     lines += counter_table(
         Counter(days_bucket(r["days_before"]) for r in sellouts), ("距乘車日", "次數")
     ) + [""]
+
+    # --- 售完→釋出時間差（生存分析）---
+    lines += sellout_release_lines(rows, args.min_full_minutes)
 
     report = "\n".join(lines)
     REPORT_MD.write_text(report, encoding="utf-8")
