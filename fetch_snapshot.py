@@ -71,14 +71,17 @@ def get_token() -> str:
     return r.json()["access_token"]
 
 
-def api_get(token: str, path: str):
+def api_get(token: str, path: str, extra_params: dict | None = None):
     url = f"{BASE_URL}/{path}"
+    params = {"$format": "JSON"}
+    if extra_params:
+        params.update(extra_params)
     backoffs = [5, 10, 20, 40, 60, 90]
     for attempt, backoff in enumerate(backoffs + [0]):
         r = requests.get(
             url,
             headers={"authorization": f"Bearer {token}"},
-            params={"$format": "JSON"},
+            params=params,
             timeout=30,
         )
         if r.status_code == 429:  # TDX 免費方案限流頗敏感，耐心退避
@@ -105,8 +108,14 @@ def fetch_od(token: str, origin: str, dest: str, train_date: str):
 
 def fetch_all_od(token: str, train_date: str):
     """一次取回整天「所有」OD 組合的剩餘座位（2500+ 筆）。
-    比逐 OD 各打一次大幅省下呼叫次數，且之後加任何站對都不增加呼叫。"""
-    return api_get(token, f"Rail/THSR/AvailableSeatStatus/Train/OD/TrainDate/{train_date}")
+    比逐 OD 各打一次大幅省下呼叫次數，且之後加任何站對都不增加呼叫。
+    $select 只取需要欄位、砍掉多語言站名，單次計量約少 6 成。"""
+    return api_get(
+        token,
+        f"Rail/THSR/AvailableSeatStatus/Train/OD/TrainDate/{train_date}",
+        {"$select": "TrainNo,OriginStationID,DestinationStationID,"
+                    "StandardSeatStatus,BusinessSeatStatus"},
+    )
 
 
 def fetch_timetable_all(token: str, train_date: str) -> dict:
