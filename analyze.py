@@ -69,6 +69,43 @@ def counter_table(counter: Counter, header=("項目", "次數"), sort_keys=False
     return lines
 
 
+def heatmap_lines(releases: list) -> list:
+    """當日票釋票的「小時 × 星期」熱力表（只用 today，有小時解析度）。
+    星期取偵測當下的星期，回答「週幾的幾點最容易撿到釋票」。"""
+    grid = {}  # (hour, weekday) -> count
+    for r in releases:
+        if r["run_kind"] != "today":
+            continue
+        dt = datetime.fromisoformat(r["detected_taipei"])
+        grid[(dt.hour, dt.weekday())] = grid.get((dt.hour, dt.weekday()), 0) + 1
+    if not grid:
+        return []
+
+    lines = [
+        "## 釋票熱力表（當日票：小時 × 星期）",
+        "",
+        "> 數字＝該時段偵測到的釋票次數，`·`＝0；只列有資料的小時。",
+        "> 註：受抓取排程影響——凌晨 01–05 點 feed 凍結、抓得稀疏，該段偏冷屬正常。",
+        "",
+        "| 時＼週 | 一 | 二 | 三 | 四 | 五 | 六 | 日 | 小計 |",
+        "|---|---|---|---|---|---|---|---|---|",
+    ]
+    col_tot = [0] * 7
+    for h in range(24):
+        cells, row_tot = [], 0
+        for wd in range(7):
+            c = grid.get((h, wd), 0)
+            cells.append(str(c) if c else "·")
+            row_tot += c
+            col_tot[wd] += c
+        if row_tot == 0:
+            continue  # 跳過整列皆 0 的小時，省版面
+        lines.append(f"| {h:02d}時 | " + " | ".join(cells) + f" | {row_tot} |")
+    lines.append("| **小計** | " + " | ".join(f"**{t}**" for t in col_tot) +
+                 f" | **{sum(col_tot)}** |")
+    return lines + [""]
+
+
 def main():
     rows = load_rows()
     if not rows:
@@ -111,6 +148,9 @@ def main():
     if win_future:
         lines += ["### 預售票（解析度＝TDX 更新窗）", ""]
         lines += counter_table(win_future, ("時間窗", "釋票次數")) + [""]
+
+    # --- 釋票熱力表（小時 × 星期）---
+    lines += heatmap_lines(releases)
 
     # --- 距乘車日 ---
     lines += ["## 釋票 vs 距乘車日", ""]
