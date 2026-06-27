@@ -341,9 +341,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--today", action="store_true", help="只抓今天")
-    group.add_argument("--future", action="store_true", help="抓 D+1 ~ D+27")
+    group.add_argument("--future", action="store_true",
+                       help="抓未來票（預設 D+1~D+27，可用 --days-from/--days-to 限範圍）")
     group.add_argument("--probe", action="store_true", help="印出 API 原始回傳")
     group.add_argument("--stations", action="store_true", help="列出車站代碼")
+    parser.add_argument("--days-from", type=int, default=1, help="future 起始天數（含），預設 1")
+    parser.add_argument("--days-to", type=int, default=27, help="future 結束天數（含），預設 27")
     args = parser.parse_args()
 
     if args.probe:
@@ -357,7 +360,8 @@ def main() -> None:
     if args.today:
         run("today", [today_tpe.isoformat()])
     else:
-        dates = [(today_tpe + timedelta(days=i)).isoformat() for i in range(1, 28)]
+        dates = [(today_tpe + timedelta(days=i)).isoformat()
+                 for i in range(args.days_from, args.days_to + 1)]
         run("future", dates)
 
 
