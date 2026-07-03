@@ -1,13 +1,13 @@
 {
- "snapshot_utc": "2026-07-01T01:15:06+00:00",
- "snapshot_taipei": "2026-07-01T09:15:06+08:00",
+ "snapshot_utc": "2026-07-03T02:32:53+00:00",
+ "snapshot_taipei": "2026-07-03T10:32:53+08:00",
  "trains": {
   "0108": {
    "standard": "Available",
    "business": "Available"
   },
   "0112": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0116": {
@@ -15,7 +15,7 @@
    "business": "Available"
   },
   "0120": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0124": {
@@ -71,7 +71,7 @@
    "business": "Available"
   },
   "0294": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0300": {
@@ -91,11 +91,11 @@
    "business": "Available"
   },
   "0612": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0616": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0618": {
@@ -107,11 +107,11 @@
    "business": "Available"
   },
   "0624": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0628": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0630": {
@@ -191,19 +191,19 @@
    "business": "Available"
   },
   "0802": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0806": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0810": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0814": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0818": {
@@ -231,7 +231,7 @@
    "business": "Available"
   },
   "0842": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0846": {
@@ -263,7 +263,7 @@
    "business": "Available"
   },
   "1218": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "1222": {
