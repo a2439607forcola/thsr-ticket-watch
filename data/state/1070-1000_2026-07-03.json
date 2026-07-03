@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-07-03T06:38:06+00:00",
- "snapshot_taipei": "2026-07-03T14:38:06+08:00",
+ "snapshot_utc": "2026-07-03T06:47:45+00:00",
+ "snapshot_taipei": "2026-07-03T14:47:45+08:00",
  "trains": {
   "0128": {
    "standard": "Full",
@@ -19,7 +19,7 @@
    "business": "Limited"
   },
   "0144": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Full"
   },
   "0148": {
@@ -124,7 +124,7 @@
   },
   "0834": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0838": {
    "standard": "Full",
