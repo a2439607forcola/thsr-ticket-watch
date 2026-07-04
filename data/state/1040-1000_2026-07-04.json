@@ -1,14 +1,10 @@
 {
- "snapshot_utc": "2026-07-04T15:20:04+00:00",
- "snapshot_taipei": "2026-07-04T23:20:04+08:00",
+ "snapshot_utc": "2026-07-04T15:30:04+00:00",
+ "snapshot_taipei": "2026-07-04T23:30:04+08:00",
  "trains": {
   "0294": {
    "standard": "Full",
    "business": "Limited"
-  },
-  "0690": {
-   "standard": "Full",
-   "business": "Full"
   },
   "0696": {
    "standard": "Limited",
