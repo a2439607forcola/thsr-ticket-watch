@@ -1,10 +1,10 @@
 {
- "snapshot_utc": "2026-07-05T21:04:04+00:00",
- "snapshot_taipei": "2026-07-06T05:04:04+08:00",
+ "snapshot_utc": "2026-07-05T21:05:04+00:00",
+ "snapshot_taipei": "2026-07-06T05:05:04+08:00",
  "trains": {
   "0109": {
-   "standard": "Full",
-   "business": "Available"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0117": {
    "standard": "Available",
@@ -59,11 +59,11 @@
    "business": "Available"
   },
   "0203": {
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "0205": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Limited"
   },
   "0207": {
@@ -92,18 +92,18 @@
   },
   "0603": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0609": {
    "standard": "Limited",
    "business": "Available"
   },
   "0613": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0615": {
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "0619": {
@@ -199,19 +199,19 @@
    "business": "Available"
   },
   "0803": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0805": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0809": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0813": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0817": {
@@ -239,7 +239,7 @@
    "business": "Available"
   },
   "0841": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0845": {
@@ -263,7 +263,7 @@
    "business": "Available"
   },
   "1103": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "1209": {
@@ -283,7 +283,7 @@
    "business": "Available"
   },
   "1305": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "1311": {
