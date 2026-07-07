@@ -1,18 +1,18 @@
 {
- "snapshot_utc": "2026-07-07T11:15:05+00:00",
- "snapshot_taipei": "2026-07-07T19:15:05+08:00",
+ "snapshot_utc": "2026-07-07T12:15:06+00:00",
+ "snapshot_taipei": "2026-07-07T20:15:06+08:00",
  "trains": {
   "0108": {
-   "standard": "Available",
+   "standard": "Full",
    "business": "Available"
   },
   "0112": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0116": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Limited",
+   "business": "Full"
   },
   "0120": {
    "standard": "Available",
@@ -32,11 +32,11 @@
   },
   "0136": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0140": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0144": {
    "standard": "Available",
@@ -59,7 +59,7 @@
    "business": "Available"
   },
   "0204": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Full"
   },
   "0206": {
@@ -68,7 +68,7 @@
   },
   "0242": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0294": {
    "standard": "Available",
@@ -79,15 +79,15 @@
    "business": "Available"
   },
   "0606": {
-   "standard": "Available",
-   "business": "Limited"
+   "standard": "Full",
+   "business": "Full"
   },
   "0610": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0612": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0616": {
@@ -116,7 +116,7 @@
   },
   "0636": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0640": {
    "standard": "Available",
@@ -187,7 +187,7 @@
    "business": "Available"
   },
   "0802": {
-   "standard": "Available",
+   "standard": "Full",
    "business": "Available"
   },
   "0806": {
@@ -199,7 +199,7 @@
    "business": "Available"
   },
   "0814": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0818": {
@@ -223,7 +223,7 @@
    "business": "Available"
   },
   "0838": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0842": {
@@ -252,7 +252,7 @@
   },
   "1202": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "1238": {
    "standard": "Available",
