@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-07-10T08:15:04+00:00",
- "snapshot_taipei": "2026-07-10T16:15:04+08:00",
+ "snapshot_utc": "2026-07-12T02:17:19+00:00",
+ "snapshot_taipei": "2026-07-12T10:17:19+08:00",
  "trains": {
   "0109": {
    "standard": "Available",
@@ -79,6 +79,10 @@
    "business": "Available"
   },
   "0333": {
+   "standard": "Available",
+   "business": "Available"
+  },
+  "0583": {
    "standard": "Available",
    "business": "Available"
   },
@@ -254,18 +258,6 @@
    "standard": "Available",
    "business": "Available"
   },
-  "1103": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1209": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1213": {
-   "standard": "Available",
-   "business": "Available"
-  },
   "1217": {
    "standard": "Available",
    "business": "Available"
@@ -274,7 +266,31 @@
    "standard": "Available",
    "business": "Available"
   },
+  "1229": {
+   "standard": "Available",
+   "business": "Available"
+  },
   "1233": {
+   "standard": "Available",
+   "business": "Available"
+  },
+  "1237": {
+   "standard": "Available",
+   "business": "Available"
+  },
+  "1241": {
+   "standard": "Available",
+   "business": "Available"
+  },
+  "1245": {
+   "standard": "Available",
+   "business": "Available"
+  },
+  "1253": {
+   "standard": "Available",
+   "business": "Available"
+  },
+  "1257": {
    "standard": "Available",
    "business": "Available"
   },
@@ -290,19 +306,11 @@
    "standard": "Available",
    "business": "Available"
   },
-  "1313": {
+  "1327": {
    "standard": "Available",
    "business": "Available"
   },
-  "1317": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1321": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1607": {
+  "1329": {
    "standard": "Available",
    "business": "Available"
   },
@@ -311,6 +319,10 @@
    "business": "Available"
   },
   "1685": {
+   "standard": "Available",
+   "business": "Available"
+  },
+  "1691": {
    "standard": "Available",
    "business": "Available"
   }
