@@ -43,15 +43,15 @@
    "business": "Available"
   },
   "0153": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0157": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0161": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0165": {
@@ -67,11 +67,11 @@
    "business": "Available"
   },
   "0207": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0249": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0295": {
@@ -163,31 +163,31 @@
    "business": "Available"
   },
   "0663": {
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "0667": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0669": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0673": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0675": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0679": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0681": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0687": {
@@ -211,7 +211,7 @@
    "business": "Available"
   },
   "0813": {
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "0817": {
@@ -243,30 +243,26 @@
    "business": "Available"
   },
   "0845": {
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "0849": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0853": {
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "0857": {
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "0861": {
    "standard": "Available",
    "business": "Available"
   },
-  "1217": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1225": {
+  "1213": {
    "standard": "Available",
    "business": "Available"
   },
@@ -287,51 +283,51 @@
    "business": "Available"
   },
   "1245": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "1253": {
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "1257": {
    "standard": "Available",
    "business": "Available"
   },
-  "1305": {
+  "1321": {
    "standard": "Available",
    "business": "Available"
   },
-  "1307": {
+  "1331": {
    "standard": "Available",
    "business": "Available"
   },
-  "1309": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1327": {
-   "standard": "Full",
-   "business": "Available"
-  },
-  "1505": {
+  "1533": {
    "standard": "Available",
    "business": "Available"
   },
   "1537": {
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
-  "1547": {
-   "standard": "Full",
-   "business": "Full"
+  "1541": {
+   "standard": "Available",
+   "business": "Available"
+  },
+  "1545": {
+   "standard": "Available",
+   "business": "Available"
   },
   "1549": {
-   "standard": "Full",
-   "business": "Full"
+   "standard": "Available",
+   "business": "Available"
+  },
+  "1553": {
+   "standard": "Available",
+   "business": "Available"
   },
   "1557": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "1563": {
@@ -347,24 +343,16 @@
    "business": "Available"
   },
   "1685": {
-   "standard": "Limited",
+   "standard": "Available",
+   "business": "Available"
+  },
+  "1689": {
+   "standard": "Available",
    "business": "Available"
   },
   "1691": {
    "standard": "Available",
    "business": "Available"
-  },
-  "3541": {
-   "standard": "Full",
-   "business": "Available"
-  },
-  "3545": {
-   "standard": "Full",
-   "business": "Available"
-  },
-  "3553": {
-   "standard": "Full",
-   "business": "Full"
   }
  }
 }
