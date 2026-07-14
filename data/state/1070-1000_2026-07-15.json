@@ -1,22 +1,22 @@
 {
- "snapshot_utc": "2026-07-14T21:04:05+00:00",
- "snapshot_taipei": "2026-07-15T05:04:05+08:00",
+ "snapshot_utc": "2026-07-14T21:05:05+00:00",
+ "snapshot_taipei": "2026-07-15T05:05:05+08:00",
  "trains": {
   "0108": {
-   "standard": "Full",
-   "business": "Full"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0112": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Limited"
   },
   "0116": {
    "standard": "Available",
-   "business": "Full"
+   "business": "Limited"
   },
   "0120": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0124": {
    "standard": "Available",
@@ -63,7 +63,7 @@
    "business": "Available"
   },
   "0206": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Full"
   },
   "0242": {
@@ -79,24 +79,24 @@
    "business": "Available"
   },
   "0606": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0610": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0612": {
-   "standard": "Full",
-   "business": "Available"
+   "standard": "Limited",
+   "business": "Full"
   },
   "0616": {
    "standard": "Available",
    "business": "Available"
   },
   "0618": {
-   "standard": "Available",
-   "business": "Limited"
+   "standard": "Limited",
+   "business": "Full"
   },
   "0622": {
    "standard": "Available",
@@ -191,11 +191,11 @@
    "business": "Available"
   },
   "0806": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0810": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0814": {
@@ -263,7 +263,7 @@
    "business": "Available"
   },
   "1302": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "1322": {
@@ -275,7 +275,7 @@
    "business": "Available"
   },
   "1602": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   }
  }
