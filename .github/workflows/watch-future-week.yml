@@ -17,6 +17,9 @@ jobs:
   snapshot:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      # analyze.py 的產出時間戳用本地時間；runner 預設 UTC，固定成台灣時間
+      TZ: Asia/Taipei
     steps:
       - uses: actions/checkout@v5
 
