@@ -1,12 +1,9 @@
-name: watch-today
+name: watch-future-week
 
 on:
   schedule:
-    # 台灣 00 時＋06~23 時每 10 分鐘（UTC 16 = 台灣 00；UTC 22,23,0-15 = 台灣 06~23）
-    # 台灣 05 時由 watch-dawn 以每分鐘解析度接手，此處不排
-    - cron: "*/10 0-16,22-23 * * *"
-    # 台灣 01~04 時凌晨冷區降頻為每 20 分鐘（04:45 起 watch-dawn 加密接手）
-    - cron: "0,20,40 17-20 * * *"
+    # 近週 D+1~D+7（全部星期）：每小時 :15 一次，並重建統計報告
+    - cron: "15 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -29,11 +26,14 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Fetch today snapshot
+      - name: Fetch future snapshots (D+1~D+7)
         env:
           TDX_CLIENT_ID: ${{ secrets.TDX_CLIENT_ID }}
           TDX_CLIENT_SECRET: ${{ secrets.TDX_CLIENT_SECRET }}
-        run: python fetch_snapshot.py --today
+        run: python fetch_snapshot.py --future --days-from 1 --days-to 7
+
+      - name: Rebuild report
+        run: python analyze.py
 
       - name: Commit data
         run: |
@@ -44,7 +44,7 @@ jobs:
             echo "no changes"
             exit 0
           fi
-          git commit -m "snapshot(today): $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M')"
+          git commit -m "snapshot(future-week): $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M')"
           for i in 1 2 3; do
             git push && exit 0
             git pull --rebase

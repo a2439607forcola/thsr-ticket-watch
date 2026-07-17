@@ -1,10 +1,9 @@
-name: watch-future
+name: watch-future-far
 
 on:
   schedule:
-    # TDX 對 D+1~D+27 一天更新 3 次（台灣 10/16/22 時）
-    # UTC 02:20 / 08:20 / 14:20 = 台灣 10:20 / 16:20 / 22:20，留緩衝抓更新後的資料
-    - cron: "20 2,8,14 * * *"
+    # 遠程 D+15~D+27：每日 2 次（台灣 11:50 / 23:50）
+    - cron: "50 3,15 * * *"
   workflow_dispatch:
 
 permissions:
@@ -17,6 +16,7 @@ concurrency:
 jobs:
   snapshot:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
 
@@ -26,14 +26,11 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Fetch future snapshots (D+1 ~ D+27)
+      - name: Fetch future snapshots (D+15~D+27)
         env:
           TDX_CLIENT_ID: ${{ secrets.TDX_CLIENT_ID }}
           TDX_CLIENT_SECRET: ${{ secrets.TDX_CLIENT_SECRET }}
-        run: python fetch_snapshot.py --future
-
-      - name: Rebuild report
-        run: python analyze.py
+        run: python fetch_snapshot.py --future --days-from 15 --days-to 27
 
       - name: Commit data
         run: |
@@ -44,7 +41,7 @@ jobs:
             echo "no changes"
             exit 0
           fi
-          git commit -m "snapshot(future): $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M')"
+          git commit -m "snapshot(future-far): $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M')"
           for i in 1 2 3; do
             git push && exit 0
             git pull --rebase

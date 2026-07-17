@@ -1,12 +1,10 @@
-name: watch-today
+name: watch-future-hot
 
 on:
   schedule:
-    # 台灣 00 時＋06~23 時每 10 分鐘（UTC 16 = 台灣 00；UTC 22,23,0-15 = 台灣 06~23）
-    # 台灣 05 時由 watch-dawn 以每分鐘解析度接手，此處不排
-    - cron: "*/10 0-16,22-23 * * *"
-    # 台灣 01~04 時凌晨冷區降頻為每 20 分鐘（04:45 起 watch-dawn 加密接手）
-    - cron: "0,20,40 17-20 * * *"
+    # 熱門乘車日（週五＋週日）D+1~D+27：台灣 05~23 時每 10 分鐘
+    # UTC 21-23,0-15 = 台灣 05~23；尾數 7 錯開 watch-today 的整 10 分
+    - cron: "7,17,27,37,47,57 0-15,21-23 * * *"
   workflow_dispatch:
 
 permissions:
@@ -29,11 +27,11 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Fetch today snapshot
+      - name: Fetch future snapshots (Fri+Sun, D+1~D+27)
         env:
           TDX_CLIENT_ID: ${{ secrets.TDX_CLIENT_ID }}
           TDX_CLIENT_SECRET: ${{ secrets.TDX_CLIENT_SECRET }}
-        run: python fetch_snapshot.py --today
+        run: python fetch_snapshot.py --future --weekdays 4,6
 
       - name: Commit data
         run: |
@@ -44,7 +42,7 @@ jobs:
             echo "no changes"
             exit 0
           fi
-          git commit -m "snapshot(today): $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M')"
+          git commit -m "snapshot(future-hot): $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M')"
           for i in 1 2 3; do
             git push && exit 0
             git pull --rebase

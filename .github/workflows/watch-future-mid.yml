@@ -1,12 +1,9 @@
-name: watch-today
+name: watch-future-mid
 
 on:
   schedule:
-    # 台灣 00 時＋06~23 時每 10 分鐘（UTC 16 = 台灣 00；UTC 22,23,0-15 = 台灣 06~23）
-    # 台灣 05 時由 watch-dawn 以每分鐘解析度接手，此處不排
-    - cron: "*/10 0-16,22-23 * * *"
-    # 台灣 01~04 時凌晨冷區降頻為每 20 分鐘（04:45 起 watch-dawn 加密接手）
-    - cron: "0,20,40 17-20 * * *"
+    # 中程 D+8~D+14：每日 3 次（台灣 10:40 / 14:40 / 22:40）
+    - cron: "40 2,6,14 * * *"
   workflow_dispatch:
 
 permissions:
@@ -29,11 +26,11 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Fetch today snapshot
+      - name: Fetch future snapshots (D+8~D+14)
         env:
           TDX_CLIENT_ID: ${{ secrets.TDX_CLIENT_ID }}
           TDX_CLIENT_SECRET: ${{ secrets.TDX_CLIENT_SECRET }}
-        run: python fetch_snapshot.py --today
+        run: python fetch_snapshot.py --future --days-from 8 --days-to 14
 
       - name: Commit data
         run: |
@@ -44,7 +41,7 @@ jobs:
             echo "no changes"
             exit 0
           fi
-          git commit -m "snapshot(today): $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M')"
+          git commit -m "snapshot(future-mid): $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M')"
           for i in 1 2 3; do
             git push && exit 0
             git pull --rebase
