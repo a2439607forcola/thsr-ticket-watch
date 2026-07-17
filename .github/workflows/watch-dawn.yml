@@ -42,7 +42,15 @@ jobs:
             git add data
             if ! git diff --cached --quiet; then
               git commit -m "snapshot(dawn): $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M')"
-              git push || { git pull --rebase && git push; } || true
+              if ! git push; then
+                if ! git pull --rebase; then
+                  # CSV 由 union merge 自動解；剩下的衝突取本輪新值
+                  git checkout --theirs -- data 2>/dev/null || true
+                  git add data
+                  GIT_EDITOR=true git rebase --continue || git rebase --abort
+                fi
+                git push || true
+              fi
             fi
             i=$((i+1))
             [ "$(date -u +%s)" -ge "$end_epoch" ] && break

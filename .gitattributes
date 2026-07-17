@@ -1,0 +1,3 @@
+# 兩個 CSV 都是 append-only：並發 run 各自加列時用 union 合併，兩邊的列都保留
+data/transitions.csv merge=union
+data/feed_freshness.csv merge=union

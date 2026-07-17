@@ -47,6 +47,11 @@ jobs:
           git commit -m "snapshot(future-week): $(TZ=Asia/Taipei date +'%Y-%m-%d %H:%M')"
           for i in 1 2 3; do
             git push && exit 0
-            git pull --rebase
+            if ! git pull --rebase; then
+              # CSV 由 union merge 自動解；剩下的衝突（state json 整檔改寫）取本輪新值
+              git checkout --theirs -- data 2>/dev/null || true
+              git add data
+              GIT_EDITOR=true git rebase --continue || git rebase --abort
+            fi
           done
           git push
