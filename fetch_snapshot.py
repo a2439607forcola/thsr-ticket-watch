@@ -61,12 +61,28 @@ FRESHNESS_CSV = DATA_DIR / "feed_freshness.csv"
 FRESHNESS_FIELDS = ["detected_utc", "detected_taipei", "src_update_time", "n_seats"]
 
 
+def _request_with_retry(method: str, url: str, **kwargs):
+    """發送 HTTP 請求，對逾時／連線錯誤（ReadTimeout、ConnectTimeout、連線重置等）重試。
+    最多重試 3 次，每次間隔 15 秒（單純 sleep，不做指數退避——這類錯誤多半是
+    暫時性網路問題，跟 429 限流的成因不同，兩者互不干擾）。3 次都失敗才把例外往上拋。"""
+    max_retries = 3
+    for attempt in range(max_retries + 1):
+        try:
+            return requests.request(method, url, **kwargs)
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+            if attempt >= max_retries:
+                raise
+            print(f"  網路逾時/連線錯誤（{type(e).__name__}），15s 後重試（{attempt + 1}/{max_retries}）...")
+            time.sleep(15)
+
+
 def get_token() -> str:
     cid = os.environ.get("TDX_CLIENT_ID")
     secret = os.environ.get("TDX_CLIENT_SECRET")
     if not cid or not secret:
         sys.exit("錯誤：請先設定環境變數 TDX_CLIENT_ID / TDX_CLIENT_SECRET")
-    r = requests.post(
+    r = _request_with_retry(
+        "POST",
         AUTH_URL,
         data={"grant_type": "client_credentials", "client_id": cid, "client_secret": secret},
         timeout=30,
@@ -82,7 +98,8 @@ def api_get(token: str, path: str, extra_params: dict | None = None):
         params.update(extra_params)
     backoffs = [5, 10, 20, 40, 60, 90]
     for attempt, backoff in enumerate(backoffs + [0]):
-        r = requests.get(
+        r = _request_with_retry(
+            "GET",
             url,
             headers={"authorization": f"Bearer {token}"},
             params=params,

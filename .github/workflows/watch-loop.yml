@@ -1,0 +1,39 @@
+name: watch-loop
+
+on:
+  schedule:
+    # GitHub cron 是盡力而為、高頻會被大量跳過（實測約每小時才發車一次、遲到 40~50 分）。
+    # 因此 cron 只負責把接力 job 叫起來：每 30 分排一次，配合 concurrency group
+    # （同時最多一跑一等、新 fire 頂掉舊 pending）串成近乎連續的接力。
+    # 分鐘級節奏由 run_loop.py 在 job 內自己看錶決定，cron 漂移不影響取樣精度。
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: thsr-data
+  cancel-in-progress: false
+
+env:
+  TZ: Asia/Taipei
+
+jobs:
+  loop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Run scheduler loop (58 min)
+        env:
+          TDX_CLIENT_ID: ${{ secrets.TDX_CLIENT_ID }}
+          TDX_CLIENT_SECRET: ${{ secrets.TDX_CLIENT_SECRET }}
+        run: python run_loop.py --max-minutes 58
