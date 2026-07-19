@@ -1,9 +1,9 @@
 {
- "snapshot_utc": "2026-07-19T20:01:24+00:00",
- "snapshot_taipei": "2026-07-20T04:01:24+08:00",
+ "snapshot_utc": "2026-07-19T21:34:43+00:00",
+ "snapshot_taipei": "2026-07-20T05:34:43+08:00",
  "trains": {
   "0108": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Limited"
   },
   "0112": {
@@ -12,7 +12,7 @@
   },
   "0116": {
    "standard": "Available",
-   "business": "Limited"
+   "business": "Full"
   },
   "0120": {
    "standard": "Available",
@@ -24,7 +24,7 @@
   },
   "0128": {
    "standard": "Available",
-   "business": "Limited"
+   "business": "Available"
   },
   "0132": {
    "standard": "Available",
@@ -59,12 +59,12 @@
    "business": "Available"
   },
   "0204": {
-   "standard": "Full",
-   "business": "Full"
+   "standard": "Limited",
+   "business": "Available"
   },
   "0206": {
    "standard": "Full",
-   "business": "Full"
+   "business": "Limited"
   },
   "0242": {
    "standard": "Available",
@@ -76,7 +76,7 @@
   },
   "0300": {
    "standard": "Full",
-   "business": "Full"
+   "business": "Limited"
   },
   "0502": {
    "standard": "Full",
@@ -95,7 +95,7 @@
    "business": "Available"
   },
   "0612": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0616": {
@@ -199,11 +199,11 @@
    "business": "Available"
   },
   "0806": {
-   "standard": "Full",
-   "business": "Available"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0810": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0814": {
@@ -243,7 +243,7 @@
    "business": "Available"
   },
   "0850": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0854": {
@@ -263,7 +263,7 @@
    "business": "Limited"
   },
   "1210": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Full"
   },
   "1218": {
@@ -283,7 +283,7 @@
    "business": "Available"
   },
   "1302": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "1322": {
