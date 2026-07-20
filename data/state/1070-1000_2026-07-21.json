@@ -1,14 +1,14 @@
 {
- "snapshot_utc": "2026-07-20T21:04:09+00:00",
- "snapshot_taipei": "2026-07-21T05:04:09+08:00",
+ "snapshot_utc": "2026-07-20T21:10:01+00:00",
+ "snapshot_taipei": "2026-07-21T05:10:01+08:00",
  "trains": {
   "0108": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Limited"
   },
   "0112": {
-   "standard": "Available",
-   "business": "Limited"
+   "standard": "Limited",
+   "business": "Full"
   },
   "0116": {
    "standard": "Available",
@@ -63,8 +63,8 @@
    "business": "Available"
   },
   "0206": {
-   "standard": "Full",
-   "business": "Limited"
+   "standard": "Available",
+   "business": "Full"
   },
   "0242": {
    "standard": "Available",
@@ -75,19 +75,19 @@
    "business": "Available"
   },
   "0300": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "0606": {
-   "standard": "Full",
-   "business": "Available"
-  },
-  "0610": {
    "standard": "Limited",
    "business": "Available"
   },
-  "0612": {
+  "0606": {
+   "standard": "Limited",
+   "business": "Available"
+  },
+  "0610": {
    "standard": "Available",
+   "business": "Available"
+  },
+  "0612": {
+   "standard": "Limited",
    "business": "Available"
   },
   "0616": {
@@ -187,19 +187,19 @@
    "business": "Available"
   },
   "0802": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0806": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0810": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0814": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0818": {
@@ -211,7 +211,7 @@
    "business": "Available"
   },
   "0826": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0830": {
@@ -275,7 +275,7 @@
    "business": "Available"
   },
   "1602": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   }
  }
