@@ -1,13 +1,13 @@
 {
- "snapshot_utc": "2026-07-21T11:47:35+00:00",
- "snapshot_taipei": "2026-07-21T19:47:35+08:00",
+ "snapshot_utc": "2026-07-21T12:15:06+00:00",
+ "snapshot_taipei": "2026-07-21T20:15:06+08:00",
  "trains": {
   "0109": {
-   "standard": "Limited",
-   "business": "Limited"
+   "standard": "Full",
+   "business": "Full"
   },
   "0117": {
-   "standard": "Available",
+   "standard": "Full",
    "business": "Available"
   },
   "0121": {
@@ -16,7 +16,7 @@
   },
   "0125": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0129": {
    "standard": "Available",
@@ -59,16 +59,16 @@
    "business": "Available"
   },
   "0203": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0205": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0207": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0249": {
    "standard": "Available",
@@ -92,19 +92,19 @@
   },
   "0603": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0609": {
+   "standard": "Limited",
+   "business": "Full"
+  },
+  "0613": {
    "standard": "Full",
    "business": "Available"
   },
-  "0613": {
-   "standard": "Available",
-   "business": "Available"
-  },
   "0615": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Limited"
   },
   "0619": {
    "standard": "Available",
@@ -203,15 +203,15 @@
    "business": "Available"
   },
   "0805": {
-   "standard": "Available",
+   "standard": "Full",
    "business": "Available"
   },
   "0809": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0813": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0817": {
@@ -271,8 +271,8 @@
    "business": "Available"
   },
   "1305": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Limited"
   },
   "1307": {
    "standard": "Available",
