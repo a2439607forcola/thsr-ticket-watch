@@ -1,22 +1,14 @@
 {
- "snapshot_utc": "2026-07-22T04:50:09+00:00",
- "snapshot_taipei": "2026-07-22T12:50:09+08:00",
+ "snapshot_utc": "2026-07-22T06:20:56+00:00",
+ "snapshot_taipei": "2026-07-22T14:20:56+08:00",
  "trains": {
-  "0125": {
-   "standard": "Full",
-   "business": "Full"
-  },
-  "0129": {
-   "standard": "Full",
-   "business": "Full"
-  },
   "0133": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Full"
   },
   "0137": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Limited",
+   "business": "Full"
   },
   "0141": {
    "standard": "Available",
@@ -58,14 +50,6 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0627": {
-   "standard": "Full",
-   "business": "Full"
-  },
-  "0633": {
-   "standard": "Full",
-   "business": "Full"
-  },
   "0637": {
    "standard": "Full",
    "business": "Full"
@@ -75,16 +59,16 @@
    "business": "Full"
   },
   "0643": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Full"
   },
   "0645": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Full"
   },
   "0649": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Full"
   },
   "0651": {
    "standard": "Available",
@@ -138,21 +122,17 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0821": {
-   "standard": "Full",
-   "business": "Full"
-  },
   "0825": {
    "standard": "Full",
    "business": "Full"
   },
   "0829": {
-   "standard": "Limited",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Full"
   },
   "0833": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Full"
   },
   "0837": {
    "standard": "Available",
@@ -184,7 +164,7 @@
   },
   "1241": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Full"
   },
   "1253": {
    "standard": "Available",
