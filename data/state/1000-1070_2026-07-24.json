@@ -1,10 +1,10 @@
 {
- "snapshot_utc": "2026-07-23T05:47:04+00:00",
- "snapshot_taipei": "2026-07-23T13:47:04+08:00",
+ "snapshot_utc": "2026-07-23T05:57:04+00:00",
+ "snapshot_taipei": "2026-07-23T13:57:04+08:00",
  "trains": {
   "0109": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0117": {
    "standard": "Full",
@@ -15,28 +15,28 @@
    "business": "Full"
   },
   "0125": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "0129": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "0133": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "0137": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0141": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Available"
   },
   "0145": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0149": {
    "standard": "Full",
@@ -55,11 +55,11 @@
    "business": "Available"
   },
   "0165": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0203": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0205": {
@@ -68,11 +68,11 @@
   },
   "0207": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0249": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0295": {
    "standard": "Available",
@@ -100,7 +100,7 @@
   },
   "0619": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Full"
   },
   "0621": {
    "standard": "Full",
@@ -112,7 +112,7 @@
   },
   "0627": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0633": {
    "standard": "Available",
@@ -143,11 +143,11 @@
    "business": "Available"
   },
   "0655": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0657": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0661": {
@@ -172,7 +172,7 @@
   },
   "0675": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0679": {
    "standard": "Full",
@@ -196,18 +196,18 @@
   },
   "0805": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Full"
   },
   "0809": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Full"
   },
   "0813": {
    "standard": "Full",
    "business": "Available"
   },
   "0817": {
-   "standard": "Available",
+   "standard": "Full",
    "business": "Available"
   },
   "0821": {
@@ -231,7 +231,7 @@
    "business": "Available"
   },
   "0841": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0845": {
@@ -251,32 +251,32 @@
    "business": "Available"
   },
   "0861": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "1217": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "1225": {
    "standard": "Limited",
-   "business": "Limited"
+   "business": "Full"
   },
   "1229": {
    "standard": "Limited",
-   "business": "Available"
+   "business": "Limited"
   },
   "1233": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "1237": {
-   "standard": "Limited",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Limited"
   },
   "1241": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "1245": {
    "standard": "Full",
@@ -292,19 +292,19 @@
   },
   "1305": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Full"
   },
   "1307": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Limited"
   },
   "1309": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "1327": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "1329": {
    "standard": "Full",
