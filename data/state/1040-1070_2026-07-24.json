@@ -1,11 +1,7 @@
 {
- "snapshot_utc": "2026-07-24T00:40:09+00:00",
- "snapshot_taipei": "2026-07-24T08:40:09+08:00",
+ "snapshot_utc": "2026-07-24T01:42:37+00:00",
+ "snapshot_taipei": "2026-07-24T09:42:37+08:00",
  "trains": {
-  "0109": {
-   "standard": "Limited",
-   "business": "Limited"
-  },
   "0117": {
    "standard": "Full",
    "business": "Limited"
@@ -15,7 +11,7 @@
    "business": "Full"
   },
   "0125": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Full"
   },
   "0129": {
@@ -58,13 +54,9 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0205": {
+  "0207": {
    "standard": "Full",
    "business": "Limited"
-  },
-  "0207": {
-   "standard": "Limited",
-   "business": "Available"
   },
   "0249": {
    "standard": "Full",
@@ -77,10 +69,6 @@
   "0333": {
    "standard": "Available",
    "business": "Available"
-  },
-  "0603": {
-   "standard": "Full",
-   "business": "Full"
   },
   "0609": {
    "standard": "Full",
@@ -103,7 +91,7 @@
    "business": "Available"
   },
   "0625": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0627": {
@@ -136,7 +124,7 @@
   },
   "0651": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0655": {
    "standard": "Limited",
@@ -171,7 +159,7 @@
    "business": "Limited"
   },
   "0679": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Limited"
   },
   "0681": {
@@ -184,14 +172,6 @@
   },
   "0693": {
    "standard": "Available",
-   "business": "Available"
-  },
-  "0803": {
-   "standard": "Limited",
-   "business": "Limited"
-  },
-  "0805": {
-   "standard": "Full",
    "business": "Available"
   },
   "0809": {
@@ -235,7 +215,7 @@
    "business": "Limited"
   },
   "0849": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Limited"
   },
   "0853": {
@@ -255,7 +235,7 @@
    "business": "Available"
   },
   "1225": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "1229": {
