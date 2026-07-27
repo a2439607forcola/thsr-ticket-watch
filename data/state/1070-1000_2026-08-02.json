@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-07-27T09:47:03+00:00",
- "snapshot_taipei": "2026-07-27T17:47:03+08:00",
+ "snapshot_utc": "2026-07-27T12:15:05+00:00",
+ "snapshot_taipei": "2026-07-27T20:15:05+08:00",
  "trains": {
   "0108": {
    "standard": "Available",
@@ -136,7 +136,7 @@
   },
   "0652": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0654": {
    "standard": "Full",
@@ -148,7 +148,7 @@
   },
   "0660": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Full"
   },
   "0664": {
    "standard": "Full",
@@ -160,7 +160,7 @@
   },
   "0670": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0672": {
    "standard": "Full",
@@ -168,7 +168,7 @@
   },
   "0676": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0678": {
    "standard": "Full",
@@ -219,23 +219,23 @@
    "business": "Available"
   },
   "0834": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0838": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0842": {
    "standard": "Full",
    "business": "Available"
   },
   "0846": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0850": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0854": {
@@ -276,7 +276,7 @@
   },
   "1246": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "1250": {
    "standard": "Full",
@@ -284,7 +284,7 @@
   },
   "1254": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "1258": {
    "standard": "Full",
@@ -295,27 +295,27 @@
    "business": "Available"
   },
   "1310": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "1318": {
-   "standard": "Limited",
-   "business": "Limited"
+   "standard": "Full",
+   "business": "Full"
   },
   "1320": {
    "standard": "Full",
    "business": "Full"
   },
   "1324": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "1326": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "1328": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "1330": {
