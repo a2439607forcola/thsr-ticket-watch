@@ -1,21 +1,9 @@
 {
- "snapshot_utc": "2026-07-27T05:50:05+00:00",
- "snapshot_taipei": "2026-07-27T13:50:05+08:00",
+ "snapshot_utc": "2026-07-27T08:51:21+00:00",
+ "snapshot_taipei": "2026-07-27T16:51:21+08:00",
  "trains": {
-  "0129": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "0133": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "0137": {
-   "standard": "Available",
-   "business": "Available"
-  },
   "0141": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0145": {
@@ -54,45 +42,21 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0633": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "0637": {
-   "standard": "Limited",
-   "business": "Limited"
-  },
-  "0639": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "0643": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "0645": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "0649": {
-   "standard": "Available",
-   "business": "Available"
-  },
   "0651": {
    "standard": "Available",
    "business": "Available"
   },
   "0655": {
-   "standard": "Available",
+   "standard": "Full",
    "business": "Available"
   },
   "0657": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0661": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0663": {
    "standard": "Available",
@@ -130,24 +94,12 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0825": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "0829": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "0833": {
-   "standard": "Available",
-   "business": "Available"
-  },
   "0837": {
    "standard": "Available",
    "business": "Available"
   },
   "0841": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0845": {
