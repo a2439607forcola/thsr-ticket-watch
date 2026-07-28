@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-07-28T10:47:02+00:00",
- "snapshot_taipei": "2026-07-28T18:47:02+08:00",
+ "snapshot_utc": "2026-07-28T10:57:01+00:00",
+ "snapshot_taipei": "2026-07-28T18:57:01+08:00",
  "trains": {
   "0108": {
    "standard": "Available",
@@ -12,7 +12,7 @@
   },
   "0116": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0120": {
    "standard": "Available",
@@ -40,7 +40,7 @@
   },
   "0144": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0148": {
    "standard": "Full",
@@ -128,11 +128,11 @@
   },
   "0646": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0648": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Full"
   },
   "0652": {
    "standard": "Full",
@@ -168,7 +168,7 @@
   },
   "0676": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0678": {
    "standard": "Full",
@@ -216,7 +216,7 @@
   },
   "0830": {
    "standard": "Limited",
-   "business": "Available"
+   "business": "Limited"
   },
   "0834": {
    "standard": "Full",
@@ -232,7 +232,7 @@
   },
   "0846": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0850": {
    "standard": "Full",
@@ -243,7 +243,7 @@
    "business": "Available"
   },
   "0858": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0862": {
@@ -263,12 +263,12 @@
    "business": "Available"
   },
   "1230": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "1234": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "1238": {
    "standard": "Full",
@@ -280,7 +280,7 @@
   },
   "1250": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "1254": {
    "standard": "Full",
@@ -332,7 +332,7 @@
   },
   "1682": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "1688": {
    "standard": "Full",
