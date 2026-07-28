@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-07-28T00:50:09+00:00",
- "snapshot_taipei": "2026-07-28T08:50:09+08:00",
+ "snapshot_utc": "2026-07-28T01:27:16+00:00",
+ "snapshot_taipei": "2026-07-28T09:27:16+08:00",
  "trains": {
   "0108": {
    "standard": "Full",
@@ -11,8 +11,8 @@
    "business": "Full"
   },
   "0116": {
-   "standard": "Limited",
-   "business": "Limited"
+   "standard": "Full",
+   "business": "Full"
   },
   "0120": {
    "standard": "Available",
@@ -58,14 +58,6 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0204": {
-   "standard": "Full",
-   "business": "Limited"
-  },
-  "0206": {
-   "standard": "Full",
-   "business": "Full"
-  },
   "0242": {
    "standard": "Available",
    "business": "Available"
@@ -73,10 +65,6 @@
   "0294": {
    "standard": "Available",
    "business": "Available"
-  },
-  "0606": {
-   "standard": "Full",
-   "business": "Full"
   },
   "0610": {
    "standard": "Full",
@@ -88,11 +76,11 @@
   },
   "0616": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0618": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0622": {
    "standard": "Available",
@@ -184,14 +172,14 @@
   },
   "0806": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0810": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0814": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0818": {
@@ -215,7 +203,7 @@
    "business": "Available"
   },
   "0838": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0842": {
@@ -250,20 +238,12 @@
    "standard": "Available",
    "business": "Available"
   },
-  "1302": {
-   "standard": "Limited",
-   "business": "Available"
-  },
   "1322": {
    "standard": "Available",
    "business": "Available"
   },
   "1336": {
    "standard": "Available",
-   "business": "Available"
-  },
-  "1602": {
-   "standard": "Full",
    "business": "Available"
   }
  }
