@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-07-29T04:47:09+00:00",
- "snapshot_taipei": "2026-07-29T12:47:09+08:00",
+ "snapshot_utc": "2026-07-29T04:57:09+00:00",
+ "snapshot_taipei": "2026-07-29T12:57:09+08:00",
  "trains": {
   "0108": {
    "standard": "Available",
@@ -27,7 +27,7 @@
    "business": "Available"
   },
   "0132": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0136": {
@@ -39,7 +39,7 @@
    "business": "Limited"
   },
   "0144": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0148": {
@@ -132,15 +132,15 @@
   },
   "0648": {
    "standard": "Limited",
-   "business": "Available"
+   "business": "Limited"
   },
   "0652": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Limited"
   },
   "0654": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0658": {
    "standard": "Full",
@@ -155,7 +155,7 @@
    "business": "Full"
   },
   "0666": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0670": {
@@ -227,15 +227,15 @@
    "business": "Limited"
   },
   "0842": {
-   "standard": "Limited",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Limited"
   },
   "0846": {
    "standard": "Full",
    "business": "Available"
   },
   "0850": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0854": {
@@ -267,19 +267,19 @@
    "business": "Available"
   },
   "1234": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Limited"
   },
   "1238": {
-   "standard": "Limited",
-   "business": "Limited"
+   "standard": "Full",
+   "business": "Full"
   },
   "1246": {
    "standard": "Full",
    "business": "Available"
   },
   "1250": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "1254": {
@@ -303,7 +303,7 @@
    "business": "Limited"
   },
   "1320": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Limited"
   },
   "1324": {
