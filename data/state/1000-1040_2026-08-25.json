@@ -55,7 +55,7 @@
    "business": "Available"
   },
   "0165": {
-   "standard": "Limited",
+   "standard": "Available",
    "business": "Available"
   },
   "0203": {
@@ -75,11 +75,19 @@
    "business": "Available"
   },
   "0295": {
-   "standard": "Full",
+   "standard": "Available",
    "business": "Available"
   },
   "0333": {
-   "standard": "Limited",
+   "standard": "Available",
+   "business": "Available"
+  },
+  "0565": {
+   "standard": "Available",
+   "business": "Available"
+  },
+  "0567": {
+   "standard": "Available",
    "business": "Available"
   },
   "0603": {
@@ -123,7 +131,7 @@
    "business": "Available"
   },
   "0639": {
-   "standard": "Available",
+   "standard": "Full",
    "business": "Available"
   },
   "0643": {
@@ -219,7 +227,7 @@
    "business": "Available"
   },
   "0829": {
-   "standard": "Available",
+   "standard": "Full",
    "business": "Available"
   },
   "0833": {
@@ -254,27 +262,11 @@
    "standard": "Available",
    "business": "Available"
   },
-  "1103": {
+  "1241": {
    "standard": "Available",
    "business": "Available"
   },
-  "1209": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1213": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1217": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1225": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1233": {
+  "1253": {
    "standard": "Available",
    "business": "Available"
   },
@@ -286,31 +278,19 @@
    "standard": "Available",
    "business": "Available"
   },
-  "1309": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1313": {
-   "standard": "Available",
-   "business": "Available"
-  },
-  "1317": {
-   "standard": "Available",
-   "business": "Available"
-  },
   "1321": {
    "standard": "Available",
    "business": "Available"
   },
-  "1607": {
+  "1505": {
    "standard": "Available",
    "business": "Available"
   },
-  "1631": {
-   "standard": "Available",
+  "1547": {
+   "standard": "Limited",
    "business": "Available"
   },
-  "1685": {
+  "1549": {
    "standard": "Available",
    "business": "Available"
   }
