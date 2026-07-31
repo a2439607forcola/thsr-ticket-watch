@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-07-31T05:23:58+00:00",
- "snapshot_taipei": "2026-07-31T13:23:58+08:00",
+ "snapshot_utc": "2026-07-31T06:15:07+00:00",
+ "snapshot_taipei": "2026-07-31T14:15:07+08:00",
  "trains": {
   "0109": {
    "standard": "Full",
@@ -8,11 +8,11 @@
   },
   "0117": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0121": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0125": {
    "standard": "Available",
@@ -92,7 +92,7 @@
   },
   "0603": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0609": {
    "standard": "Full",
@@ -115,11 +115,11 @@
    "business": "Available"
   },
   "0625": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0627": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0633": {
@@ -127,7 +127,7 @@
    "business": "Available"
   },
   "0637": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0639": {
@@ -208,14 +208,14 @@
   },
   "0809": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0813": {
    "standard": "Full",
    "business": "Available"
   },
   "0817": {
-   "standard": "Available",
+   "standard": "Full",
    "business": "Available"
   },
   "0821": {
@@ -231,7 +231,7 @@
    "business": "Available"
   },
   "0833": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0837": {
@@ -268,7 +268,7 @@
   },
   "1209": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "1213": {
    "standard": "Full",
@@ -292,7 +292,7 @@
   },
   "1307": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "1309": {
    "standard": "Full",
@@ -311,8 +311,8 @@
    "business": "Available"
   },
   "1505": {
-   "standard": "Limited",
-   "business": "Limited"
+   "standard": "Full",
+   "business": "Full"
   },
   "1509": {
    "standard": "Full",
@@ -327,7 +327,7 @@
    "business": "Available"
   },
   "1607": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "1631": {
