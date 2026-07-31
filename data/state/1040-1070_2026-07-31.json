@@ -1,11 +1,7 @@
 {
- "snapshot_utc": "2026-07-31T00:50:03+00:00",
- "snapshot_taipei": "2026-07-31T08:50:03+08:00",
+ "snapshot_utc": "2026-07-31T01:46:54+00:00",
+ "snapshot_taipei": "2026-07-31T09:46:54+08:00",
  "trains": {
-  "0109": {
-   "standard": "Full",
-   "business": "Limited"
-  },
   "0117": {
    "standard": "Limited",
    "business": "Available"
@@ -43,7 +39,7 @@
    "business": "Available"
   },
   "0153": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0157": {
@@ -58,12 +54,8 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0205": {
-   "standard": "Full",
-   "business": "Limited"
-  },
   "0207": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Limited"
   },
   "0249": {
@@ -78,25 +70,21 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0603": {
-   "standard": "Full",
-   "business": "Full"
-  },
   "0609": {
    "standard": "Full",
    "business": "Full"
   },
   "0613": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Limited"
   },
   "0615": {
-   "standard": "Limited",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Limited"
   },
   "0619": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0621": {
    "standard": "Available",
@@ -160,7 +148,7 @@
   },
   "0669": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0673": {
    "standard": "Full",
@@ -185,10 +173,6 @@
   "0693": {
    "standard": "Available",
    "business": "Available"
-  },
-  "0805": {
-   "standard": "Full",
-   "business": "Limited"
   },
   "0809": {
    "standard": "Limited",
@@ -271,7 +255,7 @@
    "business": "Limited"
   },
   "1245": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Limited"
   },
   "1253": {
@@ -296,7 +280,7 @@
   },
   "1327": {
    "standard": "Limited",
-   "business": "Limited"
+   "business": "Available"
   },
   "1631": {
    "standard": "Available",
