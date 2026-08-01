@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-08-01T00:50:09+00:00",
- "snapshot_taipei": "2026-08-01T08:50:09+08:00",
+ "snapshot_utc": "2026-08-01T01:48:18+00:00",
+ "snapshot_taipei": "2026-08-01T09:48:18+08:00",
  "trains": {
   "0108": {
    "standard": "Full",
@@ -16,7 +16,7 @@
   },
   "0120": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0124": {
    "standard": "Limited",
@@ -43,7 +43,7 @@
    "business": "Available"
   },
   "0148": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0152": {
@@ -58,14 +58,6 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0204": {
-   "standard": "Full",
-   "business": "Limited"
-  },
-  "0206": {
-   "standard": "Full",
-   "business": "Full"
-  },
   "0242": {
    "standard": "Available",
    "business": "Available"
@@ -73,10 +65,6 @@
   "0294": {
    "standard": "Available",
    "business": "Available"
-  },
-  "0606": {
-   "standard": "Full",
-   "business": "Full"
   },
   "0610": {
    "standard": "Full",
@@ -107,11 +95,11 @@
    "business": "Full"
   },
   "0630": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "0636": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0640": {
@@ -127,7 +115,7 @@
    "business": "Limited"
   },
   "0648": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Full"
   },
   "0652": {
@@ -199,7 +187,7 @@
    "business": "Full"
   },
   "0822": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0826": {
@@ -255,7 +243,7 @@
    "business": "Full"
   },
   "1222": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "1230": {
@@ -263,7 +251,7 @@
    "business": "Limited"
   },
   "1310": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "1320": {
@@ -275,7 +263,7 @@
    "business": "Available"
   },
   "1634": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "1682": {
