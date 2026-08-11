@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-08-11T23:47:36+00:00",
- "snapshot_taipei": "2026-08-12T07:47:36+08:00",
+ "snapshot_utc": "2026-08-11T23:57:07+00:00",
+ "snapshot_taipei": "2026-08-12T07:57:07+08:00",
  "trains": {
   "0108": {
    "standard": "Available",
@@ -27,7 +27,7 @@
    "business": "Available"
   },
   "0132": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Limited"
   },
   "0136": {
@@ -39,8 +39,8 @@
    "business": "Full"
   },
   "0144": {
-   "standard": "Full",
-   "business": "Full"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0148": {
    "standard": "Full",
@@ -48,7 +48,7 @@
   },
   "0152": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0156": {
    "standard": "Full",
@@ -128,15 +128,15 @@
   },
   "0646": {
    "standard": "Limited",
-   "business": "Full"
+   "business": "Limited"
   },
   "0648": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "0652": {
    "standard": "Full",
-   "business": "Full"
+   "business": "Limited"
   },
   "0654": {
    "standard": "Full",
@@ -168,14 +168,14 @@
   },
   "0676": {
    "standard": "Full",
-   "business": "Full"
+   "business": "Limited"
   },
   "0678": {
    "standard": "Full",
    "business": "Available"
   },
   "0684": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0690": {
@@ -199,7 +199,7 @@
    "business": "Available"
   },
   "0814": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0818": {
@@ -216,10 +216,10 @@
   },
   "0830": {
    "standard": "Limited",
-   "business": "Limited"
+   "business": "Full"
   },
   "0834": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "0838": {
@@ -227,7 +227,7 @@
    "business": "Full"
   },
   "0842": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Full"
   },
   "0846": {
@@ -236,14 +236,14 @@
   },
   "0850": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0854": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0858": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0862": {
@@ -276,11 +276,11 @@
   },
   "1246": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "1250": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "1254": {
    "standard": "Full",
@@ -299,7 +299,7 @@
    "business": "Available"
   },
   "1318": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "1320": {
@@ -312,7 +312,7 @@
   },
   "1326": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "1328": {
    "standard": "Full",
