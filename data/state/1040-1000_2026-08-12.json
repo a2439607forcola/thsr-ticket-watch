@@ -1,17 +1,13 @@
 {
- "snapshot_utc": "2026-08-12T03:50:08+00:00",
- "snapshot_taipei": "2026-08-12T11:50:08+08:00",
+ "snapshot_utc": "2026-08-12T05:11:10+00:00",
+ "snapshot_taipei": "2026-08-12T13:11:10+08:00",
  "trains": {
-  "0120": {
-   "standard": "Full",
-   "business": "Full"
-  },
   "0124": {
    "standard": "Full",
    "business": "Full"
   },
   "0128": {
-   "standard": "Available",
+   "standard": "Full",
    "business": "Full"
   },
   "0132": {
@@ -47,40 +43,28 @@
    "business": "Available"
   },
   "0242": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "0294": {
    "standard": "Available",
    "business": "Available"
   },
-  "0622": {
-   "standard": "Full",
-   "business": "Full"
-  },
-  "0624": {
-   "standard": "Full",
-   "business": "Full"
-  },
-  "0628": {
-   "standard": "Full",
-   "business": "Full"
-  },
   "0630": {
    "standard": "Full",
    "business": "Full"
   },
   "0636": {
-   "standard": "Available",
-   "business": "Limited"
+   "standard": "Full",
+   "business": "Full"
   },
   "0640": {
-   "standard": "Available",
-   "business": "Limited"
+   "standard": "Full",
+   "business": "Full"
   },
   "0642": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Full"
   },
   "0646": {
    "standard": "Available",
@@ -88,7 +72,7 @@
   },
   "0648": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0652": {
    "standard": "Available",
@@ -142,24 +126,16 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0814": {
-   "standard": "Full",
-   "business": "Full"
-  },
-  "0818": {
-   "standard": "Full",
-   "business": "Full"
-  },
   "0822": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Full"
   },
   "0826": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Full"
   },
   "0830": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0834": {
