@@ -1,6 +1,6 @@
 {
- "snapshot_utc": "2026-08-12T05:47:04+00:00",
- "snapshot_taipei": "2026-08-12T13:47:04+08:00",
+ "snapshot_utc": "2026-08-12T05:57:09+00:00",
+ "snapshot_taipei": "2026-08-12T13:57:09+08:00",
  "trains": {
   "0108": {
    "standard": "Available",
@@ -32,23 +32,23 @@
   },
   "0136": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0140": {
    "standard": "Full",
    "business": "Full"
   },
   "0144": {
-   "standard": "Limited",
-   "business": "Limited"
+   "standard": "Full",
+   "business": "Full"
   },
   "0148": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0152": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0156": {
    "standard": "Full",
@@ -136,7 +136,7 @@
   },
   "0646": {
    "standard": "Limited",
-   "business": "Limited"
+   "business": "Full"
   },
   "0648": {
    "standard": "Full",
@@ -144,7 +144,7 @@
   },
   "0652": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0654": {
    "standard": "Full",
@@ -176,18 +176,18 @@
   },
   "0676": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0678": {
    "standard": "Full",
    "business": "Available"
   },
   "0684": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0690": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0696": {
@@ -235,7 +235,7 @@
    "business": "Full"
   },
   "0842": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Full"
   },
   "0846": {
@@ -244,7 +244,7 @@
   },
   "0850": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0854": {
    "standard": "Full",
@@ -327,7 +327,7 @@
    "business": "Full"
   },
   "1330": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "1336": {
@@ -368,7 +368,7 @@
   },
   "1566": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "1570": {
    "standard": "Full",
