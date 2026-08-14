@@ -1,18 +1,18 @@
 {
- "snapshot_utc": "2026-08-13T23:24:52+00:00",
- "snapshot_taipei": "2026-08-14T07:24:52+08:00",
+ "snapshot_utc": "2026-08-14T00:15:04+00:00",
+ "snapshot_taipei": "2026-08-14T08:15:04+08:00",
  "trains": {
   "0109": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0117": {
    "standard": "Full",
-   "business": "Full"
+   "business": "Limited"
   },
   "0121": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Full"
   },
   "0125": {
    "standard": "Available",
@@ -60,7 +60,7 @@
   },
   "0203": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0205": {
    "standard": "Limited",
@@ -95,12 +95,12 @@
    "business": "Available"
   },
   "0613": {
-   "standard": "Limited",
-   "business": "Available"
+   "standard": "Full",
+   "business": "Full"
   },
   "0615": {
    "standard": "Full",
-   "business": "Available"
+   "business": "Limited"
   },
   "0619": {
    "standard": "Full",
@@ -111,7 +111,7 @@
    "business": "Available"
   },
   "0625": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0627": {
@@ -199,7 +199,7 @@
    "business": "Available"
   },
   "0805": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0809": {
@@ -207,7 +207,7 @@
    "business": "Available"
   },
   "0813": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0817": {
@@ -268,7 +268,7 @@
   },
   "1213": {
    "standard": "Limited",
-   "business": "Full"
+   "business": "Limited"
   },
   "1217": {
    "standard": "Available",
@@ -288,10 +288,10 @@
   },
   "1307": {
    "standard": "Limited",
-   "business": "Limited"
+   "business": "Available"
   },
   "1309": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "1313": {
@@ -307,7 +307,7 @@
    "business": "Available"
   },
   "1607": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "1631": {
