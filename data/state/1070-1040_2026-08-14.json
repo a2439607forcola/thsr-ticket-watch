@@ -1,11 +1,7 @@
 {
- "snapshot_utc": "2026-08-14T13:40:01+00:00",
- "snapshot_taipei": "2026-08-14T21:40:01+08:00",
+ "snapshot_utc": "2026-08-14T14:07:59+00:00",
+ "snapshot_taipei": "2026-08-14T22:07:59+08:00",
  "trains": {
-  "0156": {
-   "standard": "Full",
-   "business": "Available"
-  },
   "0160": {
    "standard": "Available",
    "business": "Available"
@@ -30,10 +26,6 @@
    "standard": "Available",
    "business": "Available"
   },
-  "0854": {
-   "standard": "Limited",
-   "business": "Available"
-  },
   "0858": {
    "standard": "Available",
    "business": "Available"
@@ -50,17 +42,9 @@
    "standard": "Available",
    "business": "Available"
   },
-  "1328": {
-   "standard": "Full",
-   "business": "Available"
-  },
   "1336": {
    "standard": "Available",
    "business": "Available"
-  },
-  "1682": {
-   "standard": "Full",
-   "business": "Limited"
   },
   "1688": {
    "standard": "Limited",
