@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
  "snapshot_utc": "2026-08-19T15:57:09+00:00",
  "snapshot_taipei": "2026-08-19T23:57:09+08:00",
+=======
+ "snapshot_utc": "2026-08-19T15:59:58+00:00",
+ "snapshot_taipei": "2026-08-19T23:59:58+08:00",
+>>>>>>> f78c6a1 (snapshot(today+hot+week+far): 2026-08-19 23:59)
  "trains": {
   "0109": {
    "standard": "Available",
