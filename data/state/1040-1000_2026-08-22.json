@@ -1,10 +1,10 @@
 {
- "snapshot_utc": "2026-08-21T05:29:17+00:00",
- "snapshot_taipei": "2026-08-21T13:29:17+08:00",
+ "snapshot_utc": "2026-08-21T06:15:05+00:00",
+ "snapshot_taipei": "2026-08-21T14:15:05+08:00",
  "trains": {
   "0108": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0112": {
    "standard": "Full",
@@ -32,7 +32,7 @@
   },
   "0136": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0140": {
    "standard": "Available",
@@ -68,7 +68,7 @@
   },
   "0242": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0294": {
    "standard": "Available",
@@ -76,7 +76,7 @@
   },
   "0300": {
    "standard": "Limited",
-   "business": "Available"
+   "business": "Limited"
   },
   "0502": {
    "standard": "Available",
@@ -87,7 +87,7 @@
    "business": "Available"
   },
   "0606": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0610": {
@@ -96,11 +96,11 @@
   },
   "0612": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0616": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0618": {
    "standard": "Full",
@@ -136,7 +136,7 @@
   },
   "0646": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0648": {
    "standard": "Available",
@@ -155,7 +155,7 @@
    "business": "Available"
   },
   "0660": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0664": {
@@ -195,7 +195,7 @@
    "business": "Available"
   },
   "0802": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0806": {
@@ -204,14 +204,14 @@
   },
   "0810": {
    "standard": "Full",
-   "business": "Limited"
+   "business": "Full"
   },
   "0814": {
    "standard": "Full",
    "business": "Full"
   },
   "0818": {
-   "standard": "Limited",
+   "standard": "Full",
    "business": "Available"
   },
   "0822": {
