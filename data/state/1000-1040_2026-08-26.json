@@ -1,26 +1,26 @@
 {
- "snapshot_utc": "2026-08-25T21:03:07+00:00",
- "snapshot_taipei": "2026-08-26T05:03:07+08:00",
+ "snapshot_utc": "2026-08-25T21:04:03+00:00",
+ "snapshot_taipei": "2026-08-26T05:04:03+08:00",
  "trains": {
   "0109": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Full"
   },
   "0117": {
    "standard": "Limited",
-   "business": "Limited"
+   "business": "Available"
   },
   "0121": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Limited"
   },
   "0125": {
    "standard": "Available",
-   "business": "Available"
+   "business": "Limited"
   },
   "0129": {
    "standard": "Available",
-   "business": "Limited"
+   "business": "Full"
   },
   "0133": {
    "standard": "Available",
@@ -28,7 +28,7 @@
   },
   "0137": {
    "standard": "Available",
-   "business": "Limited"
+   "business": "Available"
   },
   "0141": {
    "standard": "Available",
@@ -59,16 +59,16 @@
    "business": "Available"
   },
   "0203": {
-   "standard": "Available",
+   "standard": "Limited",
    "business": "Available"
   },
   "0205": {
-   "standard": "Full",
-   "business": "Full"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0207": {
    "standard": "Full",
-   "business": "Full"
+   "business": "Limited"
   },
   "0249": {
    "standard": "Available",
@@ -91,20 +91,20 @@
    "business": "Available"
   },
   "0603": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Full"
   },
   "0609": {
-   "standard": "Full",
-   "business": "Full"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0613": {
-   "standard": "Full",
-   "business": "Full"
+   "standard": "Limited",
+   "business": "Available"
   },
   "0615": {
-   "standard": "Available",
-   "business": "Full"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0619": {
    "standard": "Available",
@@ -203,12 +203,12 @@
    "business": "Available"
   },
   "0805": {
-   "standard": "Full",
-   "business": "Full"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0809": {
-   "standard": "Available",
-   "business": "Available"
+   "standard": "Limited",
+   "business": "Limited"
   },
   "0813": {
    "standard": "Available",
@@ -251,7 +251,7 @@
    "business": "Available"
   },
   "0853": {
-   "standard": "Full",
+   "standard": "Limited",
    "business": "Available"
   },
   "0857": {
@@ -272,7 +272,7 @@
   },
   "1305": {
    "standard": "Limited",
-   "business": "Available"
+   "business": "Full"
   },
   "1307": {
    "standard": "Limited",
