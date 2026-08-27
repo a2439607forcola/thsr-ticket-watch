@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>高鐵釋票觀測站 · 77 天視覺化報告</title>
+<style>
+  /* Hallmark · route: custom (bespoke) · structure: 發車看板 board-document（板頭 → KPI 看板列 → 重點公告 → 六面板 → 方法）
+   * idea: "高鐵月台發車看板——mono 琥珀數字、時刻表分隔線節奏、深夜鋼藍底"
+   * vibe: "紙本時刻表、燒琥珀、時刻表節奏"（2026-07-29 應使用者要求由深色改淺色 drop）
+   * paper: oklch(97% 0.008 85) 暖紙白 · accent: oklch(52% 0.12 70) 燒琥珀
+   * display: system CJK sans 800（離線單檔無法內嵌 CJK webfont，沿用 audit 記錄之限制）· utility: Cascadia Mono / Consolas
+   * axes: light / mono-utility / warm-amber · 單主題淺色
+   * charts: dataviz 驗證 series #c07c00 + #2a78d6 於 surface #fcfbf7 — ALL PASS（CVD ΔE 26.9）
+   * studied: no · context: user-picked（車站看板）· pre-emit critique: P5 H4 E4 S5 R4 V5
+   * slop-test: 58 gates — pass · gate-1 例外：離線 CJK 限制（mono 為個性載體）· contrast: pass (40–41)
+   * nav: 識別列（非 AI nav）· footer: Ft2 單行 colophon · mobile: pass (34, 49–57，320/375/768/1100 實測)
+   */
+  :root {
+    color-scheme: light;
+    --page: #f7f5f0;          /* 暖紙白 */
+    --surface: #fcfbf7;       /* 看板面 */
+    --panel-hi: #ffffffef;    /* 高一階（hover／強調格） */
+    --ink: #1f1d18;           /* 暖墨黑 */
+    --ink2: #55524a;
+    --muted: #6e6a60;
+    --grid: #e6e2d8;
+    --axis: #cfcabe;
+    --rule: #dcd7cb;          /* 看板分隔線 */
+    --accent: #a05c00;        /* 燒琥珀（版面文字用，4.9:1） */
+    --focus: #935200;
+    --s1: #c07c00;            /* 圖表系列 1：琥珀（驗證通過） */
+    --s2: #2a78d6;            /* 圖表系列 2：鋼藍（驗證通過） */
+    --deemph: #d9d5c9;
+    --band: rgba(160, 92, 0, 0.06);
+    --tipbg: #fefdfa;
+    --shadow: rgba(46, 38, 20, 0.14);
+    --hm1: #f8e8c4; --hm2: #f0d391; --hm3: #e3b95a; --hm4: #cf9a1d;
+    --hm5: #a87a06; --hm6: #815d03; --hm7: #5c4102;
+    --font-sans: "Segoe UI", "Microsoft JhengHei", "Noto Sans TC", system-ui, -apple-system, sans-serif;
+    --font-mono: "Cascadia Mono", Consolas, "Courier New", monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { overflow-x: clip; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    border-top: 3px solid var(--accent);   /* 看板框頂線 */
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px 72px; }
+
+  /* ── 板頭 ─────────────────────────────── */
+  .boardbar {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid var(--rule);
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em;
+    flex-wrap: wrap;
+  }
+  .boardbar .bb-id { color: var(--accent); }
+  .boardbar .bb-id::before {
+    content: ""; display: inline-block; width: 8px; height: 8px;
+    background: var(--accent); margin-right: 9px; vertical-align: baseline;
+  }
+  .boardbar .bb-meta { color: var(--muted); }
+
+  header.masthead { padding: 32px 0 24px; border-bottom: 1px solid var(--rule); }
+  h1 {
+    font-size: clamp(28px, 4.6vw, 42px); font-weight: 800; margin: 0 0 10px;
+    letter-spacing: 0.015em; text-wrap: balance; line-height: 1.3; font-style: normal;
+  }
+  h1 .hl { border-bottom: 3px solid var(--accent); padding-bottom: 2px; }
+  .sub { color: var(--ink2); margin: 0; font-size: 14.5px; }
+
+  /* ── KPI 看板列 ────────────────────────── */
+  .kpis {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    background: var(--surface); border-bottom: 1px solid var(--rule);
+    margin: 0;
+  }
+  .kpi { padding: 16px 16px 12px; border-left: 1px solid var(--rule); }
+  .kpi:first-child { border-left: none; }
+  .kpi .k-label { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+  .kpi .k-value {
+    font-family: var(--font-mono); font-size: 30px; font-weight: 600;
+    color: var(--accent); line-height: 1.25; margin: 2px 0 1px;
+  }
+  .kpi .k-note { font-size: 11.5px; color: var(--muted); }
+
+  /* ── 重點公告 ─────────────────────────── */
+  .findings { padding: 24px 0; border-bottom: 1px solid var(--rule); }
+  .findings h2 { font-size: 15px; font-weight: 600; margin: 0 0 14px; letter-spacing: 0.06em; color: var(--ink2); }
+  .findings ol { margin: 0; padding: 0; list-style: none; counter-reset: fx; color: var(--ink2); }
+  .findings li {
+    counter-increment: fx; position: relative; padding-left: 44px; margin-bottom: 14px;
+  }
+  .findings li::before {
+    content: counter(fx); position: absolute; left: 0; top: 1px;
+    font-family: var(--font-mono); font-size: 19px; font-weight: 600; color: var(--accent);
+  }
+  .findings li:last-child { margin-bottom: 0; }
+  .findings strong { color: var(--ink); font-weight: 600; }
+
+  /* ── 圖表面板 ─────────────────────────── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .card { padding: 24px 0 16px; border-bottom: 1px solid var(--rule); }
+  .p-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .card h2 { font-size: 17px; font-weight: 700; margin: 0; letter-spacing: 0.01em; }
+  .card h2::before {
+    content: ""; display: inline-block; width: 8px; height: 8px;
+    background: var(--accent); margin-right: 10px; vertical-align: 2px;
+  }
+  .p-meta { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+  .card .c-sub { font-size: 13px; color: var(--muted); margin: 4px 0 16px; }
+  .chart { width: 100%; }
+  .chart svg { display: block; }
+  .c-note { font-size: 12.5px; color: var(--muted); margin: 10px 0 2px; }
+  .c-note p { margin: 0 0 4px; }
+
+  .ministats { display: flex; gap: 30px; margin: 2px 0 14px; flex-wrap: wrap; }
+  .ministat .m-label { font-size: 11.5px; color: var(--muted); letter-spacing: 0.04em; }
+  .ministat .m-value { font-family: var(--font-mono); font-size: 22px; font-weight: 600; color: var(--ink); }
+  .ministat .m-value small { font-size: 12.5px; font-weight: 400; color: var(--ink2); font-family: var(--font-sans); }
+
+  .legend { display: flex; gap: 18px; align-items: center; margin: 0 0 10px; flex-wrap: wrap; }
+  .legend .li { display: flex; gap: 7px; align-items: center; font-size: 12.5px; color: var(--ink2); }
+  .legend .sw { width: 12px; height: 12px; border-radius: 2px; }
+
+  .hm-legend { display: flex; gap: 4px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
+  .hm-legend .cellsw { width: 22px; height: 12px; border-radius: 2px; }
+  .hm-legend .t { font-size: 11px; color: var(--muted); margin-right: 6px; font-family: var(--font-mono); }
+
+  details.tbl { margin-top: 10px; }
+  details.tbl summary {
+    font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+    cursor: pointer; user-select: none; letter-spacing: 0.04em; list-style: none;
+  }
+  details.tbl summary::before { content: "▸ "; color: var(--accent); }
+  details[open].tbl summary::before { content: "▾ "; }
+  details.tbl summary::-webkit-details-marker { display: none; }
+  details.tbl summary:hover { color: var(--ink2); }
+  details.tbl summary:focus-visible {
+    outline: 2px solid var(--focus); outline-offset: 2px;
+  }
+  .tblwrap { overflow-x: auto; margin-top: 8px; }
+  table { border-collapse: collapse; font-size: 12.5px; color: var(--ink2); white-space: nowrap; }
+  th, td {
+    padding: 4px 10px; border-bottom: 1px solid var(--grid); text-align: right;
+    font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 12px;
+  }
+  th { color: var(--muted); font-weight: 600; }
+  th:first-child, td:first-child { text-align: left; font-family: var(--font-sans); font-size: 12.5px; }
+
+  .method { padding-top: 26px; }
+  .method h2 { font-size: 15px; font-weight: 600; margin: 0 0 12px; letter-spacing: 0.06em; color: var(--ink2); }
+  .method ul { margin: 0; padding-left: 20px; color: var(--ink2); font-size: 13.5px; }
+  .method li { margin-bottom: 6px; }
+  .method code { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink); }
+  footer {
+    margin-top: 30px; padding-top: 14px; border-top: 1px solid var(--rule);
+    font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); letter-spacing: 0.04em;
+  }
+
+  svg text { font-family: var(--font-sans); }
+  .axis-t { font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
+  .dlabel { font-size: 11.5px; fill: var(--ink2); font-weight: 600; font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
+  .bandlabel { font-size: 10.5px; fill: var(--muted); font-family: var(--font-mono); }
+  .mark { outline: none; }
+  .mark:focus-visible { stroke: var(--focus); stroke-width: 1.5px; }
+
+  #tip {
+    position: fixed; z-index: 50; pointer-events: none; display: none;
+    background: var(--tipbg); border: 1px solid var(--rule); border-radius: 4px;
+    padding: 8px 11px; font-size: 12.5px; box-shadow: 0 2px 10px var(--shadow);
+    max-width: 260px;
+  }
+  #tip .t-title { color: var(--muted); font-size: 11.5px; margin-bottom: 3px; font-family: var(--font-mono); }
+  #tip .t-row { display: flex; justify-content: space-between; gap: 14px; }
+  #tip .t-row .v { font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
+  #tip .t-row .k { color: var(--ink2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="boardbar">
+    <span class="bb-id">THSR TICKET WATCH ／ 高鐵釋票觀測站</span>
+    <span class="bb-meta">2026-06-12 → 08-27 · 觀測結束 08-27 14:30</span>
+  </div>
+
+  <header class="masthead">
+    <h1>售完之後，票<span class="hl">什麼時候</span>回來？</h1>
+    <p class="sub">台北⇄左營、台北⇄台中、左營⇄台中共 6 方向 · TDX 座位狀態全紀錄</p>
+  </header>
+
+  <div class="kpis">
+    <div class="kpi"><div class="k-label">觀測期間</div><div class="k-value">77 天</div><div class="k-note">其中 13 天全日空窗</div></div>
+    <div class="kpi"><div class="k-label">狀態轉變紀錄</div><div class="k-value">90,022</div><div class="k-note">筆（車次 × 艙等）</div></div>
+    <div class="kpi"><div class="k-label">售完事件</div><div class="k-value">41,024</div><div class="k-note">次轉為完售</div></div>
+    <div class="kpi"><div class="k-label">釋出事件</div><div class="k-value">10,959</div><div class="k-note">次由完售恢復可訂</div></div>
+    <div class="kpi"><div class="k-label">售完後從未釋出</div><div class="k-value">74%</div><div class="k-note">28,680 / 38,583 個配對</div></div>
+  </div>
+
+  <section class="findings">
+    <h2>三個重點發現</h2>
+    <ol>
+      <li><strong>清晨 05 時偵測到的釋出量一枝獨秀</strong>，單一小時 2,967 件、是次高時段（16 時，387 件）的 7.7 倍。但這多半是假時刻：TDX feed 每晚約 23:50–05:10 凍結，00:00 起累積的退票要等 05:10 解凍才一次現形。扣掉這波，白天的退票潮主要落在 13～21 時、16 時前後最密。</li>
+      <li><strong>當日售完的票，一半在 30 分鐘內就回來了</strong>，高解析配對（n = 2,732）中位數 30 分鐘、四分位距 10～100 分鐘。剛看到售完別急著放棄，半小時內刷回來的機率不低。</li>
+      <li><strong>但拉長看，74% 的售完從此不回頭</strong>，釋出的前提是有人退票。方向差異明顯：左營→台中釋出率 39.9% 最高，台北⇄台中最低（24～26%）。</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <div class="p-head">
+      <h2>一天之中，幾點釋票？</h2>
+      <span class="p-meta">n = 6,522</span>
+    </div>
+    <p class="c-sub">每小時偵測到的釋出事件數（當日監測、偵測視窗 ≤ 20 分鐘）</p>
+    <div class="chart" id="ch-hourly"></div>
+    <div class="c-note">
+      <p>05 時那根不是真的釋票尖峰：TDX feed 每晚約 23:50–05:10 凍結，凌晨累積的退票要等解凍才一次寫進來。01–05 時取樣本就稀疏，少量事件也可能落在被剔除的低解析紀錄中。6/27–7/15 期間 05 時取樣加密至每 1.5 分鐘。</p>
+    </div>
+    <details class="tbl"><summary>檢視資料表</summary><div class="tblwrap" id="tb-hourly"></div></details>
+  </section>
+
+  <section class="card">
+    <div class="p-head">
+      <h2>週幾 × 幾點：釋票熱區</h2>
+      <span class="p-meta">64 個觀測日</span>
+    </div>
+    <p class="c-sub">顏色＝平均每個觀測日的釋出件數；游標停留可看原始累計</p>
+    <div class="chart" id="ch-heat"></div>
+    <div class="hm-legend" id="hm-legend"></div>
+    <div class="c-note"><p>各星期觀測日數不同（週四、週五各 8 天，週一至週三各 10 天），故以「平均每日」著色消除不公平比較；樣本少的格子代表性較低。</p></div>
+    <details class="tbl"><summary>檢視資料表（原始累計件數）</summary><div class="tblwrap" id="tb-heat"></div></details>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <div class="p-head">
+        <h2>售完後多久釋出？</h2>
+        <span class="p-meta">n = 2,732</span>
+      </div>
+      <p class="c-sub">當日售完 → 當日釋出的高解析配對</p>
+      <div class="ministats">
+        <div class="ministat"><div class="m-label">中位數</div><div class="m-value">30 <small>分鐘</small></div></div>
+        <div class="ministat"><div class="m-label">P25</div><div class="m-value">10 <small>分鐘</small></div></div>
+        <div class="ministat"><div class="m-label">P75</div><div class="m-value">100 <small>分鐘</small></div></div>
+      </div>
+      <div class="chart" id="ch-wait"></div>
+      <div class="c-note"><p>本圖只涵蓋「當日內回流」。含跨日與預售期低解析資料時中位數會拉長到數小時等級，但那個子集一天最少僅 3 次取樣，時間解析度太粗，這裡不併入。</p></div>
+      <details class="tbl"><summary>檢視資料表</summary><div class="tblwrap" id="tb-wait"></div></details>
+    </section>
+
+    <section class="card">
+      <div class="p-head">
+        <h2>距發車多久前釋出？</h2>
+        <span class="p-meta">n = 5,944</span>
+      </div>
+      <p class="c-sub">釋出時刻距該班次發車的時間</p>
+      <div class="chart" id="ch-dep"></div>
+      <div class="c-note"><p>官方規則「發車前 30 分鐘釋出未取／未付款票」有訊號：18.8%（1,116 件）落在發車前 30 分內。但最大宗其實在發車前 2–4 小時（1,480 件）。已剔除發車後才偵測到的 578 件。</p></div>
+      <details class="tbl"><summary>檢視資料表</summary><div class="tblwrap" id="tb-dep"></div></details>
+    </section>
+  </div>
+
+  <section class="card">
+    <div class="p-head">
+      <h2>六個方向的售完與釋出</h2>
+      <span class="p-meta">釋出率 24–40%</span>
+    </div>
+    <p class="c-sub">售完不等於等得到</p>
+    <div class="legend">
+      <span class="li"><span class="sw" style="background:var(--s2)"></span>售完事件</span>
+      <span class="li"><span class="sw" style="background:var(--s1)"></span>釋出事件</span>
+    </div>
+    <div class="chart" id="ch-dir"></div>
+    <details class="tbl"><summary>檢視資料表</summary><div class="tblwrap" id="tb-dir"></div></details>
+  </section>
+
+  <section class="card">
+    <div class="p-head">
+      <h2>77 天觀測全紀錄</h2>
+      <span class="p-meta">2026-06-12 → 08-27</span>
+    </div>
+    <p class="c-sub">每日狀態轉變筆數、四段取樣制度與資料空窗</p>
+    <div class="chart" id="ch-tl"></div>
+    <div class="c-note"><p>每日筆數同時反映「實際市場活動」與「取樣密度」，跨制度段落比較量體要小心。空窗成因：6/21–26 與 7/16–17 為執行環境轉移停擺；7/2、7/11 為單日中斷；8/21、8/23 抓取與 feed 都正常，但當日 0 筆轉變寫入，疑為推送衝突處理誤刪，未追。</p></div>
+    <details class="tbl"><summary>檢視資料表</summary><div class="tblwrap" id="tb-tl"></div></details>
+  </section>
+
+  <section class="method">
+    <h2>方法與限制</h2>
+    <ul>
+      <li>資料來源：GitHub repo <code>a2439607forcola/thsr-ticket-watch</code> 的 <code>data/transitions.csv</code>（90,022 筆，2026-06-12 07:17 – 08-27 14:30，台北時間），上游為 TDX 高鐵座位狀態 API。</li>
+      <li>定義：「售完」＝狀態轉為 Full；「釋出」＝ Full → Available／Limited；配對＝同一（方向 × 乘車日 × 車次 × 艙等）的售完→釋出接續。</li>
+      <li>時段類圖表僅計入「當日監測且偵測視窗 ≤ 20 分鐘」的事件，排除 1,452 件低解析事件，避免把長視窗內發生的事錯誤歸到單一小時。</li>
+      <li>預售期（D+1~27）資料一天僅更新 3 次（10／16／22 時），22 時–翌日 10 時為觀測盲區；凌晨釋票只能由當日資料間接驗證。</li>
+      <li>取樣制度分四段（見全紀錄圖），密度不同；05 時尖峰跨制度穩定存在，成因是 feed 夜間凍結後的批次解凍，非單一制度的取樣假象。</li>
+    </ul>
+  </section>
+
+  <footer>由 transitions.csv 全量重新計算 · 產生於 2026-08-27（觀測結束、監控已停）· 圖表可鍵盤瀏覽（Tab），每張圖附資料表</footer>
+</div>
+
+<div id="tip" role="status"></div>
+
+<script>
+const DATA = {
+  hourly: [0,0,0,0,0,2967,115,218,193,114,87,104,164,284,188,274,387,287,269,229,276,243,118,5],
+  heat: [
+         [0,0,0,0,0,181,12,34,24,8,4,17,11,12,8,27,34,38,30,10,8,8,5,0],
+         [0,0,0,0,0,249,17,15,18,13,6,8,2,28,15,39,70,25,39,6,4,6,5,0],
+         [0,0,0,0,0,411,13,47,16,5,0,3,14,21,15,24,50,34,19,11,5,7,0,0],
+         [0,0,0,0,0,315,4,28,16,2,5,7,22,24,23,39,49,33,18,33,17,10,9,0],
+         [0,0,0,0,0,373,15,14,28,6,15,30,26,50,43,49,88,46,48,50,48,43,14,0],
+         [0,0,0,0,0,570,30,46,49,33,33,20,31,51,27,22,42,38,46,39,51,44,25,0],
+         [0,0,0,0,0,868,24,34,42,47,24,19,58,98,57,74,54,73,69,80,143,125,60,5]
+  ],
+  dowDays: [10,10,10,8,8,9,9],
+  dowNames: ["週一","週二","週三","週四","週五","週六","週日"],
+  wait: [{label:"<10分",n:314},{label:"10–30分",n:958},{label:"30–60分",n:481},{label:"1–2時",n:376},{label:"2–4時",n:301},{label:"4–8時",n:224},{label:"8–24時",n:78}],
+  dep: [{label:"<15分",n:617},{label:"15–30分",n:499},{label:"30–60分",n:402},{label:"1–2時",n:885},{label:"2–4時",n:1480},{label:"4–8時",n:1004},{label:">8時",n:1057}],
+  dirs: [{d:"台北→左營",so:9715,re:2425},{d:"左營→台北",so:9581,re:2616},{d:"台北→台中",so:9133,re:2226},{d:"台中→台北",so:8899,re:2312},{d:"台中→左營",so:1925,re:673},{d:"左營→台中",so:1771,re:707}],
+  tl: [["06-12",788],["06-13",739],["06-14",648],["06-15",554],["06-16",599],["06-17",656],["06-18",696],["06-19",482],["06-20",0],["06-21",0],["06-22",0],["06-23",0],["06-24",0],["06-25",0],["06-26",0],["06-27",804],["06-28",1906],["06-29",1183],["06-30",1544],["07-01",462],["07-02",0],["07-03",2174],["07-04",1877],["07-05",1743],["07-06",1285],["07-07",1121],["07-08",1403],["07-09",1732],["07-10",873],["07-11",0],["07-12",1744],["07-13",1260],["07-14",1449],["07-15",727],["07-16",0],["07-17",0],["07-18",1932],["07-19",1249],["07-20",1209],["07-21",1332],["07-22",1481],["07-23",1726],["07-24",2123],["07-25",1731],["07-26",1524],["07-27",1231],["07-28",1342],["07-29",1453],["07-30",1627],["07-31",1945],["08-01",1715],["08-02",1492],["08-03",931],["08-04",1055],["08-05",1327],["08-06",1635],["08-07",1770],["08-08",2414],["08-09",1865],["08-10",1402],["08-11",1818],["08-12",1673],["08-13",1762],["08-14",2340],["08-15",2154],["08-16",2158],["08-17",1770],["08-18",1703],["08-19",2101],["08-20",1405],["08-21",0],["08-22",1583],["08-23",0],["08-24",839],["08-25",1273],["08-26",1257],["08-27",226]],
+  regimes: [
+    {from:0,  to:8,  label:"舊頻率",     tint:true},
+    {from:8,  to:15, label:"空窗",       tint:false},
+    {from:15, to:34, label:"本機五層頻率", tint:true},
+    {from:34, to:36, label:"空窗",       tint:false},
+    {from:36, to:38, label:"六 workflow", tint:true},
+    {from:38, to:77, label:"watch-loop", tint:true}
+  ]
+};
+
+const SVGNS = "http://www.w3.org/2000/svg";
+const fmt = n => n.toLocaleString("en-US");
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+// 上緣 4px 圓角、底邊直角的長條（自基線長出）
+function topRoundRect(x, y, w, h, parent, fill, cls) {
+  const r = Math.min(4, h, w / 2);
+  const p = el("path", { d:
+    `M${x},${y + h} L${x},${y + r} Q${x},${y} ${x + r},${y} L${x + w - r},${y} Q${x + w},${y} ${x + w},${y + r} L${x + w},${y + h} Z`,
+    class: cls || "mark" }, parent);
+  p.style.fill = fill;
+  return p;
+}
+// 右端圓角的水平長條
+function rightRoundRect(x, y, w, h, parent, fill) {
+  const r = Math.min(4, w, h / 2);
+  const p = el("path", { d:
+    `M${x},${y} L${x + w - r},${y} Q${x + w},${y} ${x + w},${y + r} L${x + w},${y + h - r} Q${x + w},${y + h} ${x + w - r},${y + h} L${x},${y + h} Z`,
+    class: "mark" }, parent);
+  p.style.fill = fill;
+  return p;
+}
+function niceMax(v) {
+  const steps = [1, 2, 2.5, 5, 10];
+  const mag = Math.pow(10, Math.floor(Math.log10(v)));
+  for (const s of steps) { const t = s * mag; if (v <= t * 4) return { step: t, max: Math.ceil(v / t) * t }; }
+  return { step: mag * 10, max: Math.ceil(v / (mag * 10)) * mag * 10 };
+}
+
+const tip = document.getElementById("tip");
+function tipContent(title, rows) {
+  tip.textContent = "";
+  const t = document.createElement("div"); t.className = "t-title"; t.textContent = title; tip.appendChild(t);
+  for (const [k, v] of rows) {
+    const r = document.createElement("div"); r.className = "t-row";
+    const ke = document.createElement("span"); ke.className = "k"; ke.textContent = k;
+    const ve = document.createElement("span"); ve.className = "v"; ve.textContent = v;
+    r.appendChild(ke); r.appendChild(ve); tip.appendChild(r);
+  }
+}
+function tipMove(x, y) {
+  const pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  let L = x + pad, T = y + pad;
+  if (L + w > innerWidth - 8) L = x - w - pad;
+  if (T + h > innerHeight - 8) T = y - h - pad;
+  tip.style.left = L + "px"; tip.style.top = T + "px";
+}
+function attachTip(mark, title, rows, label) {
+  mark.setAttribute("tabindex", "0");
+  mark.setAttribute("role", "img");
+  mark.setAttribute("aria-label", label || title + "：" + rows.map(r => r.join(" ")).join("，"));
+  mark.addEventListener("pointerenter", e => { tipContent(title, rows); tip.style.display = "block"; tipMove(e.clientX, e.clientY); });
+  mark.addEventListener("pointermove", e => tipMove(e.clientX, e.clientY));
+  mark.addEventListener("pointerleave", () => { tip.style.display = "none"; });
+  mark.addEventListener("focus", () => {
+    const b = mark.getBoundingClientRect();
+    tipContent(title, rows); tip.style.display = "block"; tipMove(b.right, b.top);
+  });
+  mark.addEventListener("blur", () => { tip.style.display = "none"; });
+}
+
+function makeTable(id, headers, rows) {
+  const host = document.getElementById(id);
+  host.textContent = "";
+  const tb = document.createElement("table");
+  const trh = document.createElement("tr");
+  for (const h of headers) { const th = document.createElement("th"); th.textContent = h; trh.appendChild(th); }
+  tb.appendChild(trh);
+  for (const row of rows) {
+    const tr = document.createElement("tr");
+    for (const c of row) { const td = document.createElement("td"); td.textContent = c; tr.appendChild(td); }
+    tb.appendChild(tr);
+  }
+  host.appendChild(tb);
+}
+
+// ── 1. 24 小時釋出量（05 時強調） ───────────────────────────
+function renderHourly() {
+  const host = document.getElementById("ch-hourly");
+  host.textContent = "";
+  const W = host.clientWidth, H = 264;
+  const m = { l: 46, r: 8, t: 24, b: 26 };
+  const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}` }, host);
+  const pw = W - m.l - m.r, ph = H - m.t - m.b;
+  const { step, max } = niceMax(Math.max(...DATA.hourly));
+  for (let v = 0; v <= max; v += step) {
+    const y = m.t + ph - (v / max) * ph;
+    const ln = el("line", { x1: m.l, x2: m.l + pw, y1: y, y2: y }, svg);
+    ln.style.stroke = v === 0 ? "var(--axis)" : "var(--grid)"; ln.style.strokeWidth = "1";
+    const tx = el("text", { x: m.l - 8, y: y + 4, "text-anchor": "end", class: "axis-t" }, svg);
+    tx.textContent = fmt(v);
+  }
+  const slot = pw / 24, bw = Math.min(24, slot - 4);
+  DATA.hourly.forEach((n, h) => {
+    const x = m.l + h * slot + (slot - bw) / 2;
+    const bh = (n / max) * ph;
+    const isPeak = h === 5;
+    if (n > 0) {
+      const bar = topRoundRect(x, m.t + ph - bh, bw, bh, svg, isPeak ? "var(--s1)" : "var(--deemph)");
+      attachTip(bar, `${String(h).padStart(2, "0")}:00–${String(h).padStart(2, "0")}:59`, [["釋出事件", fmt(n) + " 件"]]);
+    }
+    if (isPeak) {
+      const lb = el("text", { x: x + bw / 2, y: m.t + ph - bh - 7, "text-anchor": "middle", class: "dlabel" }, svg);
+      lb.textContent = "05 時 " + fmt(n) + " 件";
+    }
+    if (slot >= 26 || h % 3 === 0) {
+      const tx = el("text", { x: x + bw / 2, y: m.t + ph + 17, "text-anchor": "middle", class: "axis-t" }, svg);
+      tx.textContent = h;
+    }
+  });
+  makeTable("tb-hourly", ["時段", "釋出件數"], DATA.hourly.map((n, h) => [`${String(h).padStart(2, "0")}:00`, fmt(n)]));
+}
+
+// ── 2. 週×時 熱力圖 ────────────────────────────────────────
+const HM_BREAKS = [1, 2, 4, 8, 16, 32];
+function hmClass(avg) {
+  for (let i = 0; i < HM_BREAKS.length; i++) if (avg <= HM_BREAKS[i]) return i + 1;
+  return 7;
+}
+function renderHeat() {
+  const host = document.getElementById("ch-heat");
+  host.textContent = "";
+  const W = host.clientWidth;
+  const m = { l: 44, r: 4, t: 6, b: 22 };
+  const gap = 2;
+  const cw = (W - m.l - m.r - gap * 23) / 24, ch = 26;
+  const H = m.t + 7 * (ch + gap) + m.b;
+  const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}` }, host);
+  DATA.heat.forEach((row, d) => {
+    const y = m.t + d * (ch + gap);
+    const lb = el("text", { x: m.l - 8, y: y + ch / 2 + 4, "text-anchor": "end", class: "axis-t" }, svg);
+    lb.textContent = DATA.dowNames[d];
+    lb.style.fontFamily = "var(--font-sans)";
+    row.forEach((n, h) => {
+      const x = m.l + h * (cw + gap);
+      const avg = n / DATA.dowDays[d];
+      const cell = el("rect", { x, y, width: cw, height: ch, rx: 2, class: "mark" }, svg);
+      if (n === 0) {
+        cell.style.fill = "var(--surface)";
+        cell.style.stroke = "var(--grid)"; cell.style.strokeWidth = "1";
+      } else {
+        cell.style.fill = `var(--hm${hmClass(avg)})`;
+      }
+      attachTip(cell, `${DATA.dowNames[d]} ${String(h).padStart(2, "0")} 時`, [
+        ["平均每日", avg.toFixed(1) + " 件"],
+        ["累計", fmt(n) + " 件"],
+        ["觀測日數", DATA.dowDays[d] + " 天"]
+      ]);
+    });
+  });
+  for (let h = 0; h < 24; h += 3) {
+    const tx = el("text", { x: m.l + h * (cw + gap) + cw / 2, y: H - 6, "text-anchor": "middle", class: "axis-t" }, svg);
+    tx.textContent = h;
+  }
+  const lg = document.getElementById("hm-legend");
+  lg.textContent = "";
+  const items = [["空", "var(--surface)", true], ["≤1", "var(--hm1)"], ["1–2", "var(--hm2)"], ["2–4", "var(--hm3)"],
+                 ["4–8", "var(--hm4)"], ["8–16", "var(--hm5)"], ["16–32", "var(--hm6)"], [">32", "var(--hm7)"]];
+  for (const [t, c, bordered] of items) {
+    const sw = document.createElement("span"); sw.className = "cellsw"; sw.style.background = c;
+    if (bordered) sw.style.border = "1px solid var(--grid)";
+    const tx = document.createElement("span"); tx.className = "t"; tx.textContent = t;
+    lg.appendChild(sw); lg.appendChild(tx);
+  }
+  const unit = document.createElement("span"); unit.className = "t"; unit.textContent = "件／觀測日";
+  lg.appendChild(unit);
+  makeTable("tb-heat", ["", ...Array.from({ length: 24 }, (_, h) => h + "時")],
+    DATA.heat.map((row, d) => [DATA.dowNames[d] + `（${DATA.dowDays[d]}天）`, ...row.map(fmt)]));
+}
+
+// ── 3+4. 直方圖（共用） ────────────────────────────────────
+function renderHist(chartId, tableId, items, unitLabel) {
+  const host = document.getElementById(chartId);
+  host.textContent = "";
+  const W = host.clientWidth;
+  // 窄版 x 軸標籤交錯兩行，避免互撞
+  const stagger = (W - 50) / items.length < 48;
+  const H = stagger ? 244 : 232;
+  const m = { l: 42, r: 8, t: 20, b: stagger ? 38 : 26 };
+  const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}` }, host);
+  const pw = W - m.l - m.r, ph = H - m.t - m.b;
+  const rawMax = Math.max(...items.map(i => i.n));
+  const { step, max } = niceMax(rawMax);
+  for (let v = 0; v <= max; v += step) {
+    const y = m.t + ph - (v / max) * ph;
+    const ln = el("line", { x1: m.l, x2: m.l + pw, y1: y, y2: y }, svg);
+    ln.style.stroke = v === 0 ? "var(--axis)" : "var(--grid)"; ln.style.strokeWidth = "1";
+    const tx = el("text", { x: m.l - 7, y: y + 4, "text-anchor": "end", class: "axis-t" }, svg);
+    tx.textContent = fmt(v);
+  }
+  const slot = pw / items.length, bw = Math.min(24, slot - 8);
+  const total = items.reduce((s, i) => s + i.n, 0);
+  items.forEach((it, i) => {
+    const x = m.l + i * slot + (slot - bw) / 2;
+    const bh = (it.n / max) * ph;
+    const bar = topRoundRect(x, m.t + ph - bh, bw, bh, svg, "var(--s1)");
+    attachTip(bar, it.label, [[unitLabel, fmt(it.n) + " 件"], ["占比", (100 * it.n / total).toFixed(1) + "%"]]);
+    if (it.n === rawMax) {
+      const lb = el("text", { x: x + bw / 2, y: m.t + ph - bh - 6, "text-anchor": "middle", class: "dlabel" }, svg);
+      lb.textContent = fmt(it.n);
+    }
+    const ly = stagger && i % 2 === 1 ? m.t + ph + 29 : m.t + ph + 17;
+    const tx = el("text", { x: m.l + i * slot + slot / 2, y: ly, "text-anchor": "middle", class: "axis-t" }, svg);
+    tx.textContent = it.label;
+  });
+  makeTable(tableId, ["區間", "件數", "占比"], items.map(it => [it.label, fmt(it.n), (100 * it.n / total).toFixed(1) + "%"]));
+}
+
+// ── 5. 各方向 售完 vs 釋出（水平雙條；鋼藍＝售完、琥珀＝釋出） ──
+function renderDirs() {
+  const host = document.getElementById("ch-dir");
+  host.textContent = "";
+  const W = host.clientWidth;
+  // 窄版：縮邊距、行尾標籤只留釋出率，避免溢出裁切
+  const compact = W < 560;
+  const m = { l: compact ? 74 : 92, r: compact ? 46 : 64, t: 8, b: 24 };
+  const bh = 15, inGap = 2, groupPad = 16;
+  const gh = bh * 2 + inGap;
+  const H = m.t + DATA.dirs.length * (gh + groupPad) - groupPad + m.b + 8;
+  const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}` }, host);
+  const pw = W - m.l - m.r;
+  const { step, max } = niceMax(Math.max(...DATA.dirs.map(x => x.so)));
+  for (let v = 0; v <= max; v += step) {
+    const x = m.l + (v / max) * pw;
+    const ln = el("line", { x1: x, x2: x, y1: m.t, y2: H - m.b }, svg);
+    ln.style.stroke = v === 0 ? "var(--axis)" : "var(--grid)"; ln.style.strokeWidth = "1";
+    const tx = el("text", { x, y: H - m.b + 16, "text-anchor": "middle", class: "axis-t" }, svg);
+    tx.textContent = fmt(v);
+  }
+  DATA.dirs.forEach((it, i) => {
+    const y = m.t + i * (gh + groupPad);
+    const rate = (100 * it.re / it.so).toFixed(1) + "%";
+    const nm = el("text", { x: m.l - 10, y: y + gh / 2 + 4, "text-anchor": "end", class: "axis-t" }, svg);
+    nm.textContent = it.d; nm.style.fill = "var(--ink2)"; nm.style.fontFamily = "var(--font-sans)";
+    const b1 = rightRoundRect(m.l, y, (it.so / max) * pw, bh, svg, "var(--s2)");
+    attachTip(b1, it.d, [["售完事件", fmt(it.so) + " 件"], ["釋出率", rate]]);
+    const b2 = rightRoundRect(m.l, y + bh + inGap, (it.re / max) * pw, bh, svg, "var(--s1)");
+    attachTip(b2, it.d, [["釋出事件", fmt(it.re) + " 件"], ["釋出率", rate]]);
+    const v2 = el("text", { x: m.l + (it.re / max) * pw + 7, y: y + bh + inGap + bh / 2 + 4, class: "dlabel" }, svg);
+    v2.textContent = compact ? rate : fmt(it.re) + "（" + rate + "）";
+    v2.style.fontWeight = "400"; v2.style.fontSize = "11px";
+  });
+  makeTable("tb-dir", ["方向", "售完", "釋出", "釋出率"],
+    DATA.dirs.map(it => [it.d, fmt(it.so), fmt(it.re), (100 * it.re / it.so).toFixed(1) + "%"]));
+}
+
+// ── 6. 每日事件量時間線＋制度段 ─────────────────────────────
+function renderTimeline() {
+  const host = document.getElementById("ch-tl");
+  host.textContent = "";
+  const W = host.clientWidth;
+  // 窄版：制度段標籤必互撞 → 隱藏（tooltip 與資料表仍載明制度）
+  const showBands = W >= 640;
+  const H = showBands ? 268 : 242;
+  const m = { l: 46, r: 8, t: showBands ? 40 : 14, b: 26 };
+  const svg = el("svg", { width: W, height: H, viewBox: `0 0 ${W} ${H}` }, host);
+  const pw = W - m.l - m.r, ph = H - m.t - m.b;
+  const n = DATA.tl.length, slot = pw / n;
+  const { step, max } = niceMax(Math.max(...DATA.tl.map(x => x[1])));
+  // 制度段底色與標籤（兩層錯開避免擠壓）
+  DATA.regimes.forEach((rg, i) => {
+    const x0 = m.l + rg.from * slot, x1 = m.l + rg.to * slot;
+    if (rg.tint) {
+      const bd = el("rect", { x: x0, y: m.t, width: x1 - x0, height: ph, rx: 0 }, svg);
+      bd.style.fill = "var(--band)";
+    }
+    if (showBands) {
+      const lv = i % 2 === 0 ? 12 : 26;
+      const lb = el("text", { x: (x0 + x1) / 2, y: lv, "text-anchor": "middle", class: "bandlabel" }, svg);
+      lb.textContent = rg.label;
+    }
+    const tick = el("line", { x1: x0, x2: x0, y1: m.t - 4, y2: m.t + ph }, svg);
+    tick.style.stroke = "var(--grid)"; tick.style.strokeWidth = "1";
+  });
+  for (let v = 0; v <= max; v += step) {
+    const y = m.t + ph - (v / max) * ph;
+    const ln = el("line", { x1: m.l, x2: m.l + pw, y1: y, y2: y }, svg);
+    ln.style.stroke = v === 0 ? "var(--axis)" : "var(--grid)"; ln.style.strokeWidth = "1";
+    const tx = el("text", { x: m.l - 8, y: y + 4, "text-anchor": "end", class: "axis-t" }, svg);
+    tx.textContent = fmt(v);
+  }
+  const bw = Math.max(3, Math.min(24, slot - 2));
+  const regimeOf = i => DATA.regimes.find(r => i >= r.from && i < r.to);
+  DATA.tl.forEach(([d, v], i) => {
+    const x = m.l + i * slot + (slot - bw) / 2;
+    const rg = regimeOf(i);
+    if (v > 0) {
+      const bh = (v / max) * ph;
+      const bar = topRoundRect(x, m.t + ph - bh, bw, bh, svg, "var(--s1)");
+      attachTip(bar, "2026-" + d, [["狀態轉變", fmt(v) + " 筆"], ["取樣制度", rg.label]]);
+    } else {
+      const gap = el("rect", { x, y: m.t + ph - 3, width: bw, height: 3, rx: 1.5, class: "mark" }, svg);
+      gap.style.fill = "var(--axis)";
+      attachTip(gap, "2026-" + d, [["狀態轉變", "0 筆"], ["說明", "全日空窗"]]);
+    }
+    const li = slot * 7 >= 40 ? 7 : 14;
+    if (i % li === 0) {
+      const tx = el("text", { x: m.l + i * slot + slot / 2, y: m.t + ph + 17, "text-anchor": "middle", class: "axis-t" }, svg);
+      tx.textContent = d;
+    }
+  });
+  makeTable("tb-tl", ["日期", "筆數", "取樣制度"],
+    DATA.tl.map(([d, v], i) => ["2026-" + d, fmt(v), v === 0 ? "（空窗）" : regimeOf(i).label]));
+}
+
+function renderAll() {
+  renderHourly();
+  renderHeat();
+  renderHist("ch-wait", "tb-wait", DATA.wait, "釋出");
+  renderHist("ch-dep", "tb-dep", DATA.dep, "釋出");
+  renderDirs();
+  renderTimeline();
+}
+renderAll();
+let rt;
+addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderAll, 150); });
+</script>
+
+</body>
+</html>

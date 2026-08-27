@@ -1,0 +1,14 @@
+[
+  { "date": "2026-07-29",
+    "macrostructure": "bespoke 發車看板 board-document",
+    "theme": "custom",
+    "theme_axes": "dark / mono-utility / warm-amber",
+    "vibe": "深夜月台、LED 琥珀、時刻表節奏",
+    "enrichment": "none",
+    "brief": "高鐵釋票觀測站 · 47 天資料視覺化報告（redesign，圖表色經 dataviz 驗證）" },
+  { "date": "2026-08-27",
+    "macrostructure": "unchanged",
+    "theme": "unchanged",
+    "enrichment": "none",
+    "brief": "資料刷新至 77 天（06-12→08-27）並收尾。DATA 物件與全部文案數字由新腳本 build_viz_data.py 重算；三個寫死的軸上限改為動態；findings 1 改寫，明講 05 時尖峰是 feed 夜間凍結解凍造成的假時刻。專案監控同日停止。" }
+]

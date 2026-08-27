@@ -1,3 +1,5 @@
 __pycache__/
 *.pyc
 .env
+_scratch/
+_probe_out/
